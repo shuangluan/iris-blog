@@ -1,0 +1,43 @@
+---
+title: "Welcome to My Corner of the Internet"
+description: "A short guide to what lives here — essays, case studies, travel notes, and side projects — and how to make it your own."
+date: 2026-08-09
+category: notes
+tags: ["meta", "hello-world"]
+cover: ""
+---
+
+> _Replace this file — and the other four `.mdx` files in `content/posts/` —
+> with your own writing. This one exists as the layout stress-test._
+
+Hi, I'm **Iris**. I write about things that don't fit into a single tidy category, so this site doesn't try to pretend they do. There are five buckets:
+
+- **Notes** — POV, reflections, small essays. The kind of thing you'd read on WeChat.
+- **Case studies** — walk-throughs of things I've shipped or torn apart.
+- **Travel notes** — half itinerary, half feelings.
+- **US ⇄ CN life** — the weekly whiplash of living between two places.
+- **Side projects** — small products that started as one bad idea on a Sunday.
+
+## How to make this yours
+
+1. Edit `content/posts/*.mdx`. Frontmatter fields: `title`, `description`, `date`, `category`, `tags`, `cover`.
+2. Add new posts by dropping a new `.mdx` file into the same folder — the slug is the filename.
+3. Categories are locked to five (`notes`, `case-study`, `travel`, `life`, `side-project`) — edit `lib/posts.ts` to add more.
+
+<Callout tone="lime">
+Custom MDX components live in `lib/mdx.tsx`. This box is one of them —
+`<Callout tone="lime">…</Callout>`. Add your own alongside `Callout`.
+</Callout>
+
+## What it looks like
+
+Headings get the pink drop-shadow treatment. Inline `code` gets the acid-green box. Blockquotes get a lime-yellow bar. Tables, `![images](/x.png)`, and `--- horizontal rules` all have Y2K glow-ups.
+
+| feature       | status |
+| ------------- | ------ |
+| MDX rendering | ✅     |
+| Comments      | ✅     |
+| Analytics     | ✅     |
+| Web ring      | 🚧     |
+
+Enjoy. Break stuff.
