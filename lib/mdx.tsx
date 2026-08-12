@@ -1,7 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import rehypePrettyCode from "rehype-pretty-code";
 import type { MDXComponents } from "mdx/types";
 
 const components: MDXComponents = {
@@ -55,10 +54,7 @@ export function Mdx({ source }: { source: string }) {
         parseFrontmatter: false,
         mdxOptions: {
           remarkPlugins: [remarkGfm],
-          rehypePlugins: [
-            rehypeSlug,
-            [rehypePrettyCode, { theme: "poimandres", keepBackground: false }]
-          ]
+          rehypePlugins: [rehypeSlug]
         }
       }}
     />
