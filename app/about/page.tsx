@@ -28,7 +28,7 @@ export default function AboutPage() {
         </p>
         <p>
           The best way to reach me is{" "}
-          <a href="mailto:hi@irisluan.com">hi@irisluan.com</a>. I answer everything
+          <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. I answer everything
           that isn't a pitch.
         </p>
       </section>
@@ -106,7 +106,7 @@ export default function AboutPage() {
         <p className="text-ink-700 mb-4">
           Say hi:{" "}
           <a
-            href="mailto:hi@irisluan.com"
+            href="mailto:luanshuang.ls@gmail.com"
             className="underline decoration-lilac-200 underline-offset-4 hover:text-ink-900"
           >
             hi@irisluan.com
