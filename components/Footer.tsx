@@ -17,7 +17,7 @@ export default function Footer() {
             Elsewhere
           </div>
           <ul className="space-y-1.5">
-            <li><a href="mailto:hi@irisluan.com" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">hi@irisluan.com</a></li>
+            <li><a href="mailto:luanshuang.ls@gmail.com" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">hi@irisluan.com</a></li>
             <li><a href="https://x.com/Iris_LS_Luan" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">Twitter / X</a></li>
             <li><a href="https://github.com/shuangluan" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">GitHub</a></li>
             <li><a href="/rss.xml" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">RSS feed</a></li>
