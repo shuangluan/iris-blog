@@ -61,7 +61,7 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         {plausibleDomain ? (
-         <>
+          <>
             <Script
               async
               src="https://plausible.io/js/pa-XK2kJd2nFeJH_dVYfpkbX.js"
