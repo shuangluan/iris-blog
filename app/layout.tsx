@@ -61,12 +61,20 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         {plausibleDomain ? (
-          <Script
-            defer
-            data-domain={plausibleDomain}
-            src="https://plausible.io/js/script.js"
-            strategy="afterInteractive"
-          />
+         <>
+            <Script
+              async
+              src="https://plausible.io/js/pa-XK2kJd2nFeJH_dVYfpkbX.js"
+              strategy="afterInteractive"
+            />
+            <Script
+              id="plausible-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`,
+              }}
+            />
+          </>
         ) : null}
       </body>
     </html>
