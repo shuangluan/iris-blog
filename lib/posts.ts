@@ -19,6 +19,7 @@ export interface PostMeta {
   tags: string[];
   cover?: string;
   readingTime: string;
+  draft?: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -26,6 +27,12 @@ export interface Post extends PostMeta {
 }
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
+
+// In production we hide drafts. In local dev we show them so you can preview.
+const IS_PROD = process.env.NODE_ENV === "production";
+function isVisible(p: { draft?: boolean }) {
+  return IS_PROD ? !p.draft : true;
+}
 
 function readAll(): Post[] {
   if (!fs.existsSync(POSTS_DIR)) return [];
@@ -44,6 +51,7 @@ function readAll(): Post[] {
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       cover: data.cover ? String(data.cover) : undefined,
       readingTime: rt.text,
+      draft: Boolean(data.draft),
       content
     };
   });
@@ -51,21 +59,25 @@ function readAll(): Post[] {
 
 export function getAllPosts(): PostMeta[] {
   return readAll()
+    .filter(isVisible)
     .map(({ content, ...meta }) => meta)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getPost(slug: string): Post | null {
-  return readAll().find((p) => p.slug === slug) ?? null;
+  const post = readAll().find((p) => p.slug === slug) ?? null;
+  if (!post) return null;
+  if (!isVisible(post)) return null;
+  return post;
 }
 
 export function getAllSlugs(): string[] {
-  return readAll().map((p) => p.slug);
+  return readAll().filter(isVisible).map((p) => p.slug);
 }
 
 export function getAllTags(): { tag: string; count: number }[] {
   const map = new Map<string, number>();
-  for (const p of readAll()) {
+  for (const p of readAll().filter(isVisible)) {
     for (const t of p.tags) map.set(t, (map.get(t) ?? 0) + 1);
   }
   return [...map.entries()]
@@ -90,7 +102,7 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 };
 
 export const CATEGORY_BLURBS: Record<Category, string> = {
-  notes: "POV, reflections, small essays. The 公众号 corner.",
+  notes: "POV, reflections, small essays. The public account corner.",
   "case-study": "Walk-throughs of things I've shipped or dissected.",
   travel: "Half itinerary, half feelings. From wherever I last landed.",
   life: "Weekly whiplash of living between two countries.",

@@ -1,0 +1,136 @@
+---
+title: "Building A Creator Partnership Platform in 2 Months (When 6 Was Standard)"
+description: "We had to build our own. And we had to build it fast."
+date: 2026-07-20
+category: case-study
+tags: ["creator-economy", "platform-0-to-1", "agency-management","mvp-scoping","cross-border"]
+---
+
+> _When your instinct is to reduce scope, first expand the vision.Distinguish "user desire" from "business risk of not shipping."Weekly rituals beat monthly plans in constrained sprints._
+
+## Context
+
+In early 2021, I joined xx as Lead PM after three years at TikTok. The product is ByteDance's content-based recommendation community app — think of it as a Pinterest-Instagram hybrid focused on lifestyle content like food, travel, beauty, and fashion. Its core value comes from a high-quality content pool: users open the app because the content is genuinely useful and worth their time, not because algorithms exploit their attention.That content quality is the product's moat. And by 2023, our content supply strategy relied heavily on a global network of agencies managing thousands of creators who produced curated, ops-reviewed content for the platform. These weren't random UGC contributors. They were paid creators, working through agencies, producing content aligned with brand-safe topics and quality standards.That partnership was working. But it was operating on duct tape.
+
+## Problem
+
+Here's what "duct tape" meant in practice. When an agency wanted to onboard a new creator to work with our product, they filled out a Google Form, our ops team manually approved it, someone updated a spreadsheet, then a separate process bound the creator to that agency in our system. Every step was manual. Every step created a document version conflict, an approval bottleneck, or a permission mistake.
+
+Content approval workflows were email chains. Analytics were exported CSVs. When ops needed to know how a campaign was performing, they asked an engineer to write a query.
+
+The whole system worked because the Ops manager and his team were superhuman about coordination. But it was hitting a wall.
+
+Then the trigger came. In one of my weekly syncs with his, he brought me a warning: several of our agency partners had been quoted by a third-party SaaS tool that would run the entire agency-creator-brand workflow — onboarding, campaign management, content approval, payment, analytics. The tool was better than what agencies were experiencing with us. It would let them work independently.
+
+The math was scary. If agencies moved to this tool, we'd lose visibility into how our content pipeline actually worked. We'd become one platform among many in the tool's dashboard — not the center of the partnership. Over time, we could lose the exclusivity, quality control, and content differentiation that made Lemon8 valuable in the first place.
+
+We had to build our own. And we had to build it fast.
+
+## What I Owned vs What I Influenced
+
+I was Lead PM on the platform from initial scoping through pilot launch. I owned:
+
+- Product strategy and roadmap
+- The initial full PRD (single-author)
+- All MVP scoping decisions (in partnership with executive leadership)
+- Direct coordination with ~20 engineers across 4 sub-teams
+- User research and interviews with all 11 agency partners
+- The go/no-go call on weekly de-scoping
+
+I partnered with (didn't own):
+
+- The US Ops Manager, who was my executive partner and owned the business-side scoping
+- The TikTok design team, which we shared as a design resource
+- Regional ops teams, who owned localization and change management in their markets
+
+The important thing to know about my role: I was the person who had to say "no" to features, and I was the person accountable if we shipped late. Both of those things gave me the authority to enforce discipline on scope.
+
+## What We Actually Did
+
+Here's the timeline the leadership team and I agreed to: 2 months from zero to production for the pilot brand. Standard scope for a platform like this was 6-9 months. We had one-third of that.
+
+The instinct in most teams facing this constraint is to cut scope aggressively upfront — pick the "must-haves" and defer everything else. That approach fails because you don't actually know what's must-have until you understand the tradeoffs. You end up cutting things you needed and keeping things you didn't.
+
+I took a different approach. Four steps:
+
+Step 1: Write the full PRD myself. Over-scoped on purpose.
+
+In the first two weeks, I wrote a comprehensive PRD covering everything agencies and ops teams had asked for. Every permission tier they'd requested. Every dashboard view. Every workflow step. Every analytics query.
+
+This felt counterintuitive. Why write features I knew we'd cut?
+
+Because tradeoffs only become visible when you can see everything on the table. If I'd started with a "minimum" spec, the team would have argued about what belonged in the minimum for weeks. By writing the full vision, I made the conversation about what to cut, not what to include. That reframes the psychology.
+
+Single-author was also deliberate. Committee-written PRDs take twice as long and end up with hedged, ambiguous requirements. Mine was opinionated, specific, and I was accountable for every line.
+
+Step 2: Engineering tech assessment. Three days, no exceptions.
+
+I gave the Server lead and Frontend lead three days to review every requirement in the PRD and return, for each one:
+
+Estimated engineering effort (in days or weeks)
+Risk flag (technical uncertainty, integration complexity, dependency issues)
+
+No meetings. No debates. Just their honest assessment as senior engineers looking at a spec.
+
+Three days was enough for them to think clearly. Longer would have invited scope negotiation from stakeholders. Shorter would have gotten rushed answers I couldn't trust.
+
+Step 3: Make the MVP scoping call myself. Business risk framing.
+
+This was the hardest step, and where most PMs get it wrong. Standard MVP methodology says "cut low-value, high-effort features." That's fine, but it doesn't tell you how to weigh value.
+
+I evaluated every requirement on two axes:
+
+Engineering effort (from the tech assessment)
+Business risk if we don't ship it (my own judgment, informed by agency conversations)
+
+That second axis was crucial. The question wasn't "how much do agencies want this feature?" (they wanted all of them). The question was "if we ship without this feature, will agencies move to the third-party tool?"
+
+Some features were high-effort but low business risk — for example, a detailed cross-agency analytics dashboard with export capabilities. Agencies wanted it. But if we didn't ship it in v1, would any agency actually leave? No. Their existing spreadsheets could carry that load for another quarter. Cut.
+
+Other features were low-effort but high business risk — like the ability for agency owners to see their own creators' contract status. Small technical scope. But if agencies couldn't see this, they'd feel like they were flying blind, and it would validate the third-party tool's pitch. Keep.
+
+The gray zone was where I had to make real judgment calls. I made them based on the parallel conversations I was having with agencies — asking directly, "if X isn't in v1, is that a dealbreaker for you?" Their answers weren't always what they claimed to want.
+
+Step 4: Weekly de-scoping ritual. Non-negotiable.
+
+Every week, I met with the Server and Frontend leads for 30 minutes. The only agenda: is the current scope still shippable in the remaining time?
+
+If yes, continue. If no, something gets cut this week. No exceptions.
+
+The rule I enforced: no feature could be added without removing another feature of equivalent scope. This mattered because in a 2-month sprint, stakeholders will ask for "just one small thing" every week. Individually, each request is reasonable. Cumulatively, they kill your timeline.
+
+The de-scoping ritual made the tradeoff visible in real time. When someone requested a feature mid-sprint, my answer was: "Sure — which of these currently-in-scope features should we cut to make room?" Ninety percent of the time, they'd reconsider whether their request was actually urgent.
+
+## Results
+
+We shipped v1 in 8 weeks. It launched to [our pilot brand] on time.The direct financial impact was clear:
+- $2M USD annual cost savings compared to the third-party tool alternative agencies had been considering. This wasn't a hypothetical — this was based on real pricing conversations with the tool's sales team.
+- All agency partnerships retained. None moved to the third-party tool.The operational impact was significant:
+- Agency onboarding: weeks → days. New creators could be onboarded, bound to their agency, and cleared for content production without a manual approval cycle.
+- Content approval: email chaos → hours in platform. Ops could review, comment, and approve content in a structured workflow, not a Slack thread.
+- Ops team refocused from coordination to strategy. [Estimate ~60% of ops coordination time freed] to spend on higher-leverage work.The content pipeline impact was the one I was proudest of:
+- ~xx qualified posts per quarter now flow through the platform. These are ops-reviewed, creator-crafted, quality-vetted posts — the premium content the product depends on.
+~x point lift in overall engagement metrics. Because the product is a content-based recommendation platform, a stronger content pool compounds. Users spend more time in-app, engage more with content, and the algorithm has better material to work with. x points on a mature product's engagement metric is a meaningful number.
+
+## What I'd Do Differently
+
+Two things I'd change if I ran this again.
+
+First, I should have negotiated for 10 weeks instead of 8. 
+Not because we couldn't ship in 8 — we did. But v1 shipped slightly under-tested. We caught a permissions edge case in the first week of production that we would have caught in QA if we'd had two more weeks. It wasn't catastrophic, but it eroded trust with the first agency using the platform, and I had to spend the following month rebuilding that confidence. A slightly longer timeline would have caught the issue earlier and preserved that trust from day one.
+
+Second, I should have started thinking about agency-side APIs from day one. In v1, agencies interacted with the platform only through our UI. That was fine for the smaller agencies. But our two largest agency partners had their own internal systems they wanted to integrate with — CRM, financial tools, their own creator databases. Because I hadn't scoped for APIs in v1, they either had to double-enter data or wait for v2. Two of them explicitly told me later this was the biggest friction point of the transition. If I'd built even a minimal read-only API layer in v1, we'd have unlocked enterprise-tier agency workflows six months earlier.
+
+Both mistakes came from the same root cause: optimizing purely for the 2-month deadline made me under-index on things that only mattered post-launch. Timeline pressure has a way of shrinking your peripheral vision. Next time, I'd deliberately protect 15-20% of scope for "things that only matter after we ship."
+
+## Transferable Insights
+
+Three things from this project I now believe generalize.
+
+1. When your instinct is to reduce scope, first expand the vision. The full-PRD approach worked because it made the shape of the tradeoff space visible. If you start with "what's the minimum?" you'll accidentally cut things you needed, because you never saw them in context. Write the full vision first. Then cut ruthlessly with all the information in front of you.
+
+2. Distinguish "user desire" from "business risk of not shipping." Users always want everything. That doesn't tell you what to build. The right question is: what happens to the business if we don't ship this? If nothing terrible happens, defer it. If something terrible happens (churn, competitive loss, trust erosion), it's core. This framing is especially important when you're building against a competitive threat, where the temptation to over-scope defensively is highest.
+
+3. Weekly rituals beat monthly plans in constrained sprints. In a 2-month sprint, a monthly checkpoint is too slow to react. Weekly de-scoping created a rhythm where scope stayed alive as a decision — not a document written at kickoff and never revisited. It also created a social contract: when the whole team knew that every Monday, we were going to look at scope, they self-regulated their requests during the week.
+
+The tools of this project don't matter. The methodology transfers to any team facing a hard deadline with an ambitious scope. I've used variations of the four steps — full PRD, tight tech assessment, business-risk MVP call, weekly de-scoping ritual — in every constrained project since.

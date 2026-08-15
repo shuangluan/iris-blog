@@ -1,0 +1,62 @@
+---
+title: "The content pipeline for a solo founder is broken. Here's the gap."
+description: "The middle of the solo creator's content pipeline is empty, I know because I keep falling into it."
+date: 2026-08-14
+category: notes
+tags: ["solo-founder", "content-ops", "AI", "distribution", "SaaS"]
+cover: ""
+---
+
+Last week I finished building my own blog and turned to the next problem: managing what I write, and actually getting it out. I opened a few headless CMS websites to figure out which one would be cheapest to plug in. On the third one I stopped.
+
+> Wait! building things like this used to be my day job.
+
+I spent 7 years at ByteDance and TikTok as a PM, all in internal ops platforms and productivity tools — TikTok's content/creator module, internal workflow tools, cross-surface admin dashboards, various platforms used by ops teams of thousands. The most painful thing about building this kind of product inside a big company is that you can't validate value. Your users are your coworkers, they don't pay for it, they use it because "the company said to." You never actually know whether you built something useful or if they just had no choice.
+
+Now that I've left big tech to solo-build, every problem I hit is telling me: **the stuff I used to build inside big co is severely under-supplied outside.**
+
+## Three points of friction from the past two weeks
+
+Building my own project, I've been stuck three times:
+- **Tool account sprawl** to build one thing I've registered accounts on so many tools that some I opened twice and never touched again. I don't even remember what I signed up for. No single place to grep.
+
+- **Idea → article** I know I have things to say. But sitting in front of a blank page I don't know where to start. This is why my recent blog posts have all been "have AI interview me → I talk → we turn it into a piece."
+
+- **Article → distribution** After I finish writing, I don't update any of my social accounts. Every platform has a different tone. I don't have the energy to think about how to shape it for each one. The piece dies on my own blog.
+
+The first is background noise. **The second and third are actually two halves of the same thing — a broken content pipeline.**
+
+## The pipeline, cut in half
+
+The full content flow for a solo founder / independent creator should look roughly like this:
+
+> scattered thoughts → structured idea → longform draft → per-platform adaptation → scheduled distribution → feedback loop
+
+Plenty of tools cover the back half — Buffer, Hootsuite, Typefully, Beehiiv, Publer all do "schedule + distribute + track" well. But **almost nobody does the front half**: from "I know I have something to say" to "structured draft." What you actually need there is initiative — something that asks follow-up questions, judges which thread is worth pulling, and helps you turn scattered fragments into a coherent argument.
+
+Not a Notion AI–style passive assistant waiting for your input. An agent. Something that asks "Has anything from the past week been sitting in your head?" and then digs into your answer, and eventually tells you "there are three threads here, each could become a piece."
+
+**This capability didn't exist two years ago.** Pre-2024 LLMs couldn't sustain a persistent, memoried, judgment-bearing "editor" role. In 2026 they can. That's the "why now."
+
+## The big-co internal-platform assumption is wrong for solo builders
+
+Every platform I built in big tech was designed for **"20 ops people + 3 PMs + 5 engineers"** as users. So the UX was for team collaboration. Permissions were built for multi-role setups. Dashboards were built to be shown to bosses.
+
+The 2026 solo-founder assumption is **"1 human + a bunch of AI agents."** Permissions don't matter (there's only me). Dashboards aren't for anyone else (just me looking). Collaboration flows aren't needed (me + AI is enough).
+
+## Same category of tool, two completely different assumptions, should be two completely different products.
+
+Buffer was designed for a 5-person marketing team. It doesn't fit one person trying to cover five platforms, because it doesn't handle the front of the pipeline — the "how do I produce" and "how do I shift tone" parts. Notion AI is designed for people who already know what they want to write. It doesn't handle the "I know I want to say something but don't know how to start" part. That whole middle stretch — from head to draft, from draft to platform version — is empty.
+
+## What I'm building
+
+I'm building this pipeline for myself. I'm the most acute user, and every time I hit a friction point it doubles as a user interview.
+
+The v0 looks roughly like:
+
+- **AI interview** you talk, it follows up, it turns fragments into structured ideas
+- **Draft generation** a long-form primary draft (blog / newsletter)
+- **Multi-platform adaptation** one click for the Xiaohongshu / LinkedIn / X thread / WeChat versions, each one respecting that platform's tone, length, and visual needs
+- **Review + publish** one page, per-platform approve or re-edit, publish everything at once, results roll back into the same view
+
+I'll use it myself first. If it's smooth, I'll give it to a few friends. If that goes well, open beta.
