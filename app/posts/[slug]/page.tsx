@@ -9,6 +9,7 @@ import {
 } from "@/lib/posts";
 import { Mdx } from "@/lib/mdx";
 import Comments from "@/components/Giscus";
+import TipJar from "@/components/TipJar";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -95,6 +96,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           ))}
         </div>
       ) : null}
+
+      <TipJar />
 
       {/* prev/next */}
       <div className="grid gap-3 sm:grid-cols-2 mt-12">
