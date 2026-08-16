@@ -26,7 +26,7 @@ export default function HomePage() {
       <section className="pt-4 sm:pt-8">
         <span className="chip mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-blush-400 to-lilac-400" />
-          Writing since 2026 · Shanghai ⇄ SF
+          Writing since 2026 · Shanghai ⇄ NY
         </span>
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-6">
           Small notes from<br className="hidden sm:inline" />
