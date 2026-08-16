@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
+import NewsletterForm from "@/components/NewsletterForm";
 import {
   CATEGORY_LABELS,
   CATEGORY_BLURBS,
@@ -25,7 +26,7 @@ export default function HomePage() {
       <section className="pt-4 sm:pt-8">
         <span className="chip mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-blush-400 to-lilac-400" />
-          Writing since 2026 · Shanghai ⇄ NY
+          Writing since 2026 · Shanghai ⇄ SF
         </span>
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-6">
           Small notes from<br className="hidden sm:inline" />
@@ -33,7 +34,7 @@ export default function HomePage() {
         </h1>
         <p className="text-lg sm:text-xl text-ink-500 max-w-2xl leading-relaxed mb-8">
           I'm Iris. This is where I keep my longer thoughts — reflections,
-          case studies of things I've shipped, travel journals, and the side
+          case studies of things I've shipped, travel journals, and the small
           products I keep making on weekends.
         </p>
         <div className="flex flex-wrap gap-3">
@@ -124,18 +125,7 @@ export default function HomePage() {
         <p className="text-ink-500 mb-6 max-w-md mx-auto">
           One email when I publish. No threads, no "10 things", no spam.
         </p>
-        <form className="flex flex-col sm:flex-row justify-center gap-2 max-w-md mx-auto">
-          <input
-            type="email"
-            required
-            placeholder="you@somewhere.com"
-            className="flex-1 px-4 py-3 rounded-full bg-white/80 border border-white/90 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-lilac-400/40"
-          />
-          <button type="submit" className="btn-primary justify-center">Subscribe</button>
-        </form>
-        <div className="mt-4 text-xs text-ink-300">
-          Wire to Buttondown / ConvertKit / Beehiiv in <code>app/page.tsx</code>.
-        </div>
+        <NewsletterForm />
       </section>
     </div>
   );
