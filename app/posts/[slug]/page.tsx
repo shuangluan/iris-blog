@@ -10,6 +10,7 @@ import {
 import { Mdx } from "@/lib/mdx";
 import Comments from "@/components/Giscus";
 import TipJar from "@/components/TipJar";
+import ShareButtons from "@/components/ShareButtons";
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -96,6 +97,12 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           ))}
         </div>
       ) : null}
+
+      <ShareButtons
+        url={`${process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://irisluan.com"}/posts/${post.slug}`}
+        title={post.title}
+        description={post.description}
+      />
 
       <TipJar />
 
