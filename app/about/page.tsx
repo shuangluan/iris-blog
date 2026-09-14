@@ -63,7 +63,11 @@ export default function AboutPage() {
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {[
-            { name: "Side Project #1", desc: "One-line pitch", url: "#" },
+            {
+              name: "Verbatim",
+              desc: "Search real podcast transcripts. No LLM guessing. Alpha.",
+              url: "https://byverbatim.com"
+            },
             { name: "Side Project #2", desc: "One-line pitch", url: "#" },
             { name: "Side Project #3", desc: "One-line pitch", url: "#" },
             { name: "Side Project #4", desc: "One-line pitch", url: "#" }
