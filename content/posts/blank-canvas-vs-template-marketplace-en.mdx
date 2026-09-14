@@ -1,0 +1,102 @@
+---
+title: "Blank canvas vs template marketplace: the hidden gap between US and Chinese AI tools"
+description: "Opening Claude is a blank page. Opening Doubao is a wall of templates. Two products, two completely different invitations to your first sentence."
+date: 2026-08-17
+category: case-study
+tags: ["AI", "product-design", "US-CN", "PM", "SaaS"]
+---
+
+For the past two weeks I've been running two sets of AI tools in parallel — American and Chinese.
+
+Opening Claude Cowork is a blank page. A chat box, a blinking cursor. I say whatever, and things start.
+
+Opening Doubao (or WorkBuddy) is a wall. Tabs across the top — "Experts," "Assistants," "Tasks" — each with a dozen cards beneath: *Write a cover letter · Analyze this financial report · Generate meeting notes · Plan a brand event.* I have to scan them first, guess what each does, then decide which one my today fits into.
+
+Same category of tool, both usable out of the box. **But the first invitation each one issues to you is completely different.** One says: *what do you want to do? I'm listening.* The other says: *here are 30 things you could do — pick one.*
+
+## What I'm actually running
+
+Let me lay out the hand.
+
+**US side:**
+- **Claude** — daily driver. Work chat, decisions, Claude Cowork, Claude Design, Claude Code.
+- **ChatGPT** — lifestyle / family stuff. Backup when Claude hits token limits.
+- **Cursor** — code writing and editing.
+- **WorkBuddy** — a friend pushed it hard, I downloaded to try. Nominally US-side for me, but the product is actually Tencent's — it belongs on the CN side.
+
+**China side:**
+- **Doubao** — ByteDance's, so I know the team. I use it for Chinese-context factual queries; they recently integrated with Feishu Aily to ship a cowork surface.
+- **Kimi** — pure curiosity, especially after K3 went open-source. I wanted to try the model.
+
+I'm not heavily using a vertical agent on either side. Mostly general chat + code.
+
+## The observation
+
+Two weeks in, one clear conclusion:
+
+**At the product level (UI, capabilities, marketplace), Chinese and American tools are converging.** Open almost any large CN AI product and you'll see the same shape as Claude / ChatGPT — sidebar of chats, file attachment, multi-agent orchestration, marketplace. Every serious player is now shipping the same architecture.
+
+**But at the interaction level — how you actually start using them — they're diverging.** The divergence is the moment I described at the top: opening to a blank page, versus opening to a wall.
+
+Same shell. Completely different assumption about what your first action is.
+
+## Blank canvas vs template marketplace
+
+The blank-canvas camp: Claude Cowork, Codex, Cursor. You come in and it's empty. The product gives you the minimum affordances (chat box, attachment button, model picker) and then shuts up. Its assumption about you: **you know what you want; I'll follow.**
+
+The template-marketplace camp: Doubao, WorkBuddy, Tongyi, Zhipu — most CN products default to *30 choices on landing.* The homepage is *here are the templates, experts, tasks you could use today.* Its assumption about you: **you might not know what you want; here are 30 options to unstick you.**
+
+**Why did China go this way?** I spent 7.5 years as a PM inside ByteDance. I know the forces:
+
+- **KPIs are DAU and time-in-app.** Templates lower the entry barrier → more first-timers click into something → the metrics look better.
+- **"Educating the user" is an anti-pattern in the PM ladder.** You can't teach users what AI can do by showing them a blank chat box — too abstract, retention tanks. Give them 30 concrete templates and they're using the product in 5 seconds. Metrics stabilize immediately.
+- **The competitive dynamic is "if I don't ship it, they'll defect to the next tab."** A blank chat box has zero screenshot value on Xiaohongshu. A marketplace with 100 experts is instantly demo-able.
+
+Each of these logics is correct in traditional SaaS. **But AI chat is a new category, and the template is actually its biggest enemy.**
+
+Because: **it decides for you what you should be doing, and once that happens, you stop asking what you actually want to ask.**
+
+I open a template-heavy product and the first thing my brain does is *which of these templates is closest to what I need today?* — not *what am I actually trying to solve?* The first is fit-into-container thinking. The second is first-principle thinking. The first pulls your thinking toward the mean; only the second grows your own angle.
+
+The cost is invisible and long-term. Product metrics won't show it. The user won't feel it themselves. Until one day they notice they're no longer asking original questions.
+
+## Where each side surprised me — and where each breaks
+
+That said, CN tools aren't just template graveyards. **Kimi has surprised me a few times.**
+
+The most recent: I was thinking through the business model for a side project I'm building. I pasted the same question, verbatim, into Claude and Kimi.
+
+**Claude's answer**: clean, well-structured, covered the standard playbook — SaaS / freemium / marketplace / open source. Read like an MBA case study. General and idealized.
+
+**Kimi's answer**: went straight into *ship a free x for lead-gen, 30-day trial into paid; Chinese users are subscription-averse so consider a lifetime buyout; don't build community from scratch — test with a few micro-KOLs on Xiaohongshu first; for early monetization put a course on Xiaoetong and see what floats.*
+
+**Kimi's answer had a lot of stuff Claude doesn't automatically surface — a sense of "local commercial playbook baked into the model," like talking to a CN indie founder who's shipped a few things, not to a generic LLM.**
+
+For me this is unusually useful. My career path has been unconventional — I came in through odd corners into being a PM into solo-building. I don't want the standard answer. I want the surprising one. Kimi gave me something Claude can't easily produce: *"here's a path you probably haven't considered, try it"* energy.
+
+**But it has a clear failure mode.** Kimi will **assume things exist that don't.** I described my side project loosely and Kimi didn't ask *"where are you actually today?"* — it just launched into recommendations that presupposed features I hadn't built yet.
+
+More precisely: **Claude proactively asks clarifying questions. Kimi proactively gives confident answers.** These are different product choices, not model-capability gaps.
+
+One is caution-first. The other is momentum-first. Which one is better depends on what you need right now.
+
+## My working stack
+
+After two weeks I've landed on this mix:
+
+- **Claude** — daily driver. ~60% of my AI interactions
+- **Kimi** — when I want a CN market angle, or when I want to be surprised. ~15%
+- **Doubao** — Chinese-context factual queries. ~10%
+- **Cursor** — code. ~10%
+- **ChatGPT** — personal/family + Claude token overflow. ~5%
+- **WorkBuddy** — still evaluating
+
+One observation to close on: **the stack itself is a taste.**
+
+If I only used one side, I'd grow into a specific thinking habit. Only Claude → my proposals would slide toward *general* and *MBA-flavored.* Only Kimi/Doubao → I'd lean harder on templates and let my independent-thinking muscle atrophy.
+
+**The tool you pick shapes the thinking you grow into.**
+
+People who live on template-heavy products don't ask blank-canvas questions. People who live on blank-canvas products may never think to ask about local playbooks. **A mixed stack is itself a taste** — not the absence of a choice, but the active refusal to be entirely shaped by any one tool's assumptions.
+
+For solo founders and independent creators, this might be the most underrated product decision you make.
