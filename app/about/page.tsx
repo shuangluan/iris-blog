@@ -18,17 +18,23 @@ export default function AboutPage() {
 
       <section className="prose-soft">
         <p>
-          <em>[ The world is a playground, and I'm just a kid playing in it.]</em>
+          <em>[ Replace this whole file at </em>
+          <code>app/about/page.tsx</code>
+          <em> with your real bio. The structure below is a five-block starter — each
+          answers one thing a first-time visitor would ask. ]</em>
         </p>
         <p>
-          I'm a Product Manager based between Shanghai and the New York City. I write here about
+          I'm a ___ based between Shanghai and the Bay Area. I write here about
           the things I care about that don't fit anywhere else — product
-          decisions, small notes, case studies,travel tips, and the side projects I keep
+          decisions, small essays, travel notes, and the side projects I keep
           making on weekends.
         </p>
         <p>
+          Before this, I ___. These days I'm mostly working on ___.
+        </p>
+        <p>
           The best way to reach me is{" "}
-          <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. I answer everything
+          <a href="mailto:hi@irisluan.com">hi@irisluan.com</a>. I answer everything
           that isn't a pitch.
         </p>
       </section>
@@ -39,11 +45,11 @@ export default function AboutPage() {
         </h2>
         <ul className="glass rounded-2xl divide-y divide-lilac-200/30">
           {[
-            ["📍", "Location", "Columbia, South Carolina"],
-            ["🎧", "Listening to", "Five little monkeys(my son's favorite)"],
-            ["📖", "Reading", "Nothing"],
-            ["🛠️", "Building", "Verbatim"],
-            ["🎬", "Watching", "Nothing"]
+            ["📍", "Location", "___"],
+            ["🎧", "Listening to", "___"],
+            ["📖", "Reading", "___"],
+            ["🛠️", "Building", "___"],
+            ["🎬", "Watching", "___"]
           ].map(([e, k, v]) => (
             <li key={k as string} className="flex items-center gap-3 px-5 py-3">
               <span aria-hidden>{e}</span>
@@ -54,7 +60,16 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-      
+        <p className="mt-3 text-xs text-ink-300">
+          A "now page" (
+          <a
+            href="https://nownownow.com"
+            className="underline decoration-lilac-200 underline-offset-4 hover:text-ink-700"
+          >
+            nownownow.com
+          </a>
+          ) — update it once a month.
+        </p>
       </section>
 
       <section>
@@ -63,22 +78,31 @@ export default function AboutPage() {
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {[
-            { name: "Side Project #1", desc: "One-line pitch", url: "#" },
+            {
+              name: "Verbatim",
+              desc: "Anti-hallucination search over real podcast transcripts. Alpha.",
+              url: "https://byverbatim.com"
+            },
             { name: "Side Project #2", desc: "One-line pitch", url: "#" },
             { name: "Side Project #3", desc: "One-line pitch", url: "#" },
             { name: "Side Project #4", desc: "One-line pitch", url: "#" }
-          ].map((p) => (
-            <a
-              key={p.name}
-              href={p.url}
-              className="no-underline block glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-softLg transition-all"
-            >
-              <div className="font-medium text-ink-900 flex items-center gap-1.5">
-                {p.name} <span className="text-ink-300 group-hover:text-ink-500">↗</span>
-              </div>
-              <div className="text-sm text-ink-500 mt-0.5">{p.desc}</div>
-            </a>
-          ))}
+          ].map((p) => {
+            const external = p.url.startsWith("http");
+            return (
+              <a
+                key={p.name}
+                href={p.url}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noreferrer" : undefined}
+                className="no-underline block glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-softLg transition-all"
+              >
+                <div className="font-medium text-ink-900 flex items-center gap-1.5">
+                  {p.name} <span className="text-ink-300 group-hover:text-ink-500">↗</span>
+                </div>
+                <div className="text-sm text-ink-500 mt-0.5">{p.desc}</div>
+              </a>
+            );
+          })}
         </div>
       </section>
 
@@ -88,10 +112,10 @@ export default function AboutPage() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {[
-            { label: "Twitter / X", url: "https://x.com/Iris_LS_Luan" },
-            { label: "GitHub", url: "https://github.com/shuangluan" },
-            { label: "LinkedIn", url: "https://www.linkedin.com/in/iris-luan/" },
-            { label: "小红书", url: "https://www.xiaohongshu.com/user/profile/558bbaffb7ba22527a95ea26" },
+            { label: "Twitter / X", url: "https://x.com" },
+            { label: "GitHub", url: "https://github.com" },
+            { label: "LinkedIn", url: "https://linkedin.com" },
+            { label: "小红书", url: "https://xiaohongshu.com" },
             { label: "Email", url: "mailto:hi@irisluan.com" },
             { label: "RSS", url: "/rss.xml" }
           ].map((l) => (
@@ -106,7 +130,7 @@ export default function AboutPage() {
         <p className="text-ink-700 mb-4">
           Say hi:{" "}
           <a
-            href="mailto:luanshuang.ls@gmail.com"
+            href="mailto:hi@irisluan.com"
             className="underline decoration-lilac-200 underline-offset-4 hover:text-ink-900"
           >
             hi@irisluan.com
