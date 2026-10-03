@@ -14,7 +14,7 @@ const copy = {
     motto: "The world is a playground, and I'm just a kid playing in it.",
     bio: [
       "I'm an independent consultant and creator working between Shanghai and New York. I spent 7.5 years as a product manager at ByteDance / TikTok, building internal platforms and creator tools. Now I help teams and aspiring AI PMs turn AI ideas into products engineers can actually build, and I write here about the things I care about that don't fit anywhere else: product decisions, small notes, case studies, travel notes, and the side projects I keep making on weekends.",
-      "In 2025 I co-founded a company to explore AI products; currently running solo while I focus on consulting and writing."
+      "In 2026 I co-founded a company to explore AI products; currently running solo while I focus on consulting and writing."
     ],
     reachA: "The best way to reach me is",
     reachB: "For consulting inquiries, email me directly for now, a services page is on the way.",
@@ -43,7 +43,7 @@ const copy = {
     motto: "世界是个游乐场，而我只是在里面玩耍的小孩。",
     bio: [
       "我是一名独立顾问和创作者，在上海和纽约之间生活和工作。我在字节跳动 / TikTok 做了 7.5 年产品经理，做过 TikTok 效率协作平台、内部运营后台和创作者平台。现在我帮助团队和想转型 AI PM 的人，把 AI 想法变成工程师真正能做出来的产品。我也在这里写那些放不进别的地方的东西：产品决策、随笔、案例复盘、旅行笔记，以及我周末一直在做的个人项目。",
-      "2025 年我联合创办了一家公司探索 AI 产品；目前一个人在做，专注于咨询和写作。"
+      "2026 年我联合创办了一家公司探索 AI 产品；目前一个人在做，专注于咨询和写作。"
     ],
     reachA: "联系我最好的方式是",
     reachB: "咨询相关的事情，暂时直接发邮件给我，服务介绍页正在准备中。",
