@@ -5,9 +5,11 @@ import {
   getAllSlugs,
   getAllPosts,
   getPost,
-  CATEGORY_LABELS
+  getTranslation
 } from "@/lib/posts";
 import { Mdx } from "@/lib/mdx";
+import { t, formatDate, readingLabel, HREFLANG } from "@/lib/i18n";
+import { getLang } from "@/lib/lang-server";
 import Comments from "@/components/Giscus";
 import TipJar from "@/components/TipJar";
 import ShareButtons from "@/components/ShareButtons";
@@ -23,9 +25,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = getPost(params.slug);
   if (!post) return { title: "Not found" };
+  const translation = getTranslation(post);
+  // hreflang links: also read by the language toggle to jump to the translation
+  const languages: Record<string, string> = {
+    [HREFLANG[post.lang]]: `/posts/${post.slug}`
+  };
+  if (translation) languages[HREFLANG[translation.lang]] = `/posts/${translation.slug}`;
   return {
     title: post.title,
     description: post.description,
+    alternates: { languages },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -40,25 +49,41 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   const post = getPost(params.slug);
   if (!post) notFound();
 
-  const all = getAllPosts();
+  const lang = getLang();
+  const d = t(lang);
+  const translation = getTranslation(post);
+
+  // prev/next walk the list in this post's own language
+  const all = getAllPosts(post.lang);
   const idx = all.findIndex((p) => p.slug === post.slug);
-  const prev = all[idx + 1];
-  const next = all[idx - 1];
+  const prev = idx >= 0 ? all[idx + 1] : undefined;
+  const next = idx > 0 ? all[idx - 1] : undefined;
 
   return (
-    <article className="max-w-2xl mx-auto">
-      <div className="mb-8 text-sm">
+    <article className="max-w-2xl mx-auto" lang={post.lang === "zh" ? "zh-CN" : "en"}>
+      <div className="mb-8 text-sm flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/posts"
           className="text-ink-500 hover:text-ink-900 underline decoration-lilac-200 underline-offset-4"
         >
-          ← All writing
+          {d.post.back}
         </Link>
+        {translation ? (
+          <Link href={`/posts/${translation.slug}`} className="chip">
+            {t(post.lang).post.alsoIn}
+          </Link>
+        ) : null}
       </div>
+
+      {!translation && post.lang !== lang ? (
+        <div className="mb-8 glass rounded-2xl px-5 py-3 text-sm text-ink-500">
+          {d.post.onlyIn}
+        </div>
+      ) : null}
 
       <header className="mb-10">
         <Link href={`/posts#${post.category}`} className="chip mb-5">
-          {CATEGORY_LABELS[post.category]}
+          {d.categories[post.category]}
         </Link>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-ink-900 leading-[1.05]">
           {post.title}
@@ -72,15 +97,9 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             <span className="text-ink-500">Iris Luan</span>
           </span>
           <span>·</span>
-          <time>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric"
-            })}
-          </time>
+          <time>{formatDate(post.date, lang, "long")}</time>
           <span>·</span>
-          <span>{post.readingTime}</span>
+          <span>{readingLabel(post.readingMinutes, lang)}</span>
         </div>
       </header>
 
@@ -90,9 +109,9 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       {post.tags?.length ? (
         <div className="mt-12 pt-6 border-t border-lilac-200/40 flex flex-wrap gap-2">
-          {post.tags.map((t) => (
-            <Link key={t} href={`/tags/${t}`} className="chip">
-              #{t}
+          {post.tags.map((tag) => (
+            <Link key={tag} href={`/tags/${tag}`} className="chip">
+              #{tag}
             </Link>
           ))}
         </div>
@@ -102,9 +121,10 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         url={`${process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://irisluan.com"}/posts/${post.slug}`}
         title={post.title}
         description={post.description}
+        lang={lang}
       />
 
-      <TipJar />
+      <TipJar lang={lang} />
 
       {/* prev/next */}
       <div className="grid gap-3 sm:grid-cols-2 mt-12">
@@ -114,7 +134,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             className="no-underline glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-softLg transition-all block"
           >
             <div className="text-xs uppercase tracking-widest text-lilac-600 mb-1">
-              ← Previous
+              {d.post.prev}
             </div>
             <div className="font-medium text-ink-900 text-sm">{prev.title}</div>
           </Link>
@@ -125,7 +145,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             className="no-underline glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-softLg transition-all block sm:text-right"
           >
             <div className="text-xs uppercase tracking-widest text-blush-600 mb-1">
-              Next →
+              {d.post.next}
             </div>
             <div className="font-medium text-ink-900 text-sm">{next.title}</div>
           </Link>
@@ -135,9 +155,9 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       {/* Comments */}
       <section className="mt-16">
         <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900 mb-5">
-          Say something
+          {d.post.comments}
         </h2>
-        <Comments />
+        <Comments lang={lang} />
       </section>
     </article>
   );

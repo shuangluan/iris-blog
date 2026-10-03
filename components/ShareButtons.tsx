@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { t, type Lang } from "@/lib/i18n";
 
 interface ShareButtonsProps {
   url: string;
   title: string;
   description?: string;
+  lang?: Lang;
 }
 
 /**
@@ -15,7 +17,8 @@ interface ShareButtonsProps {
  *   let external websites trigger Moments share directly; the QR path is the
  *   universal workaround.
  */
-export default function ShareButtons({ url, title, description }: ShareButtonsProps) {
+export default function ShareButtons({ url, title, description, lang = "en" }: ShareButtonsProps) {
+  const d = t(lang).share;
   const [copied, setCopied] = useState(false);
   const [showWechat, setShowWechat] = useState(false);
 
@@ -45,7 +48,7 @@ export default function ShareButtons({ url, title, description }: ShareButtonsPr
   return (
     <div className="my-8">
       <div className="text-xs uppercase tracking-widest text-lilac-600 mb-3 text-center">
-        Share this
+        {d.title}
       </div>
       <div className="flex flex-wrap justify-center gap-2">
         <a href={links.x} target="_blank" rel="noreferrer" className="chip">
@@ -62,13 +65,13 @@ export default function ShareButtons({ url, title, description }: ShareButtonsPr
           onClick={() => setShowWechat(true)}
           className="chip"
         >
-          微信 / 朋友圈
+          {d.wechat}
         </button>
         <a href={links.email} className="chip">
           Email
         </a>
         <button type="button" onClick={copyLink} className="chip">
-          {copied ? "✓ Copied" : "Copy link"}
+          {copied ? d.copied : d.copy}
         </button>
       </div>
 

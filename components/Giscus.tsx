@@ -1,7 +1,8 @@
 "use client";
 import GiscusReact from "@giscus/react";
+import { t, type Lang } from "@/lib/i18n";
 
-export default function Comments() {
+export default function Comments({ lang = "en" }: { lang?: Lang }) {
   const repo = process.env.NEXT_PUBLIC_GISCUS_REPO;
   const repoId = process.env.NEXT_PUBLIC_GISCUS_REPO_ID;
   const category = process.env.NEXT_PUBLIC_GISCUS_CATEGORY;
@@ -11,7 +12,7 @@ export default function Comments() {
     return (
       <div className="glass rounded-2xl p-6 text-sm text-ink-700">
         <div className="text-xs uppercase tracking-widest text-lilac-600 mb-2">
-          Guestbook (not yet wired up)
+          {t(lang).comments.offline}
         </div>
         <p className="leading-relaxed">
           Comments are powered by{" "}
@@ -44,7 +45,7 @@ export default function Comments() {
         emitMetadata="0"
         inputPosition="top"
         theme="light"
-        lang="en"
+        lang={lang === "zh" ? "zh-CN" : "en"}
         loading="lazy"
       />
     </div>

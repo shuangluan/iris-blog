@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  getAllTags,
-  getAllPosts,
-  CATEGORY_LABELS,
-  type Category
-} from "@/lib/posts";
+import { getAllTags, getAllPosts, type Category } from "@/lib/posts";
+import { t, formatDate } from "@/lib/i18n";
+import { getLang } from "@/lib/lang-server";
 
 export const metadata: Metadata = {
   title: "Tags",
@@ -15,29 +12,31 @@ export const metadata: Metadata = {
 const cats: Category[] = ["notes", "case-study", "travel", "life", "side-project"];
 
 export default function TagsPage() {
-  const tags = getAllTags();
-  const posts = getAllPosts();
+  const lang = getLang();
+  const d = t(lang);
+  const tags = getAllTags(lang);
+  const posts = getAllPosts(lang);
   const max = Math.max(...tags.map((t) => t.count), 1);
 
   return (
     <div className="space-y-14">
       <header>
-        <span className="chip mb-5">✦ {tags.length} tags · {posts.length} posts</span>
+        <span className="chip mb-5">{d.tags.count(tags.length, posts.length)}</span>
         <h1 className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-4">
-          Find something to <span className="gradient-text italic">read.</span>
+          {d.tags.h1a} <span className="gradient-text italic">{d.tags.h1b}</span>
         </h1>
       </header>
 
       <section>
         <h2 className="font-display text-xl font-medium text-ink-900 mb-4">
-          By category
+          {d.tags.byCat}
         </h2>
         <div className="flex flex-wrap gap-2">
           {cats.map((c) => {
             const count = posts.filter((p) => p.category === c).length;
             return (
               <Link key={c} href={`#${c}`} className="chip">
-                {CATEGORY_LABELS[c]}
+                {d.categories[c]}
                 <span className="ml-1 text-ink-300">{count}</span>
               </Link>
             );
@@ -47,11 +46,11 @@ export default function TagsPage() {
 
       <section>
         <h2 className="font-display text-xl font-medium text-ink-900 mb-4">
-          Tag cloud
+          {d.tags.cloud}
         </h2>
         {tags.length === 0 ? (
           <p className="text-ink-500">
-            No tags yet. Add tags in each post's frontmatter.
+            {d.tags.empty}
           </p>
         ) : (
           <div className="flex flex-wrap gap-2 items-baseline">
@@ -82,7 +81,7 @@ export default function TagsPage() {
         return (
           <section key={c} id={c} className="scroll-mt-24">
             <h2 className="font-display text-xl font-medium text-ink-900 mb-3">
-              {CATEGORY_LABELS[c]}
+              {d.categories[c]}
             </h2>
             <ul className="glass rounded-2xl divide-y divide-lilac-200/30">
               {list.map((p) => (
@@ -93,11 +92,7 @@ export default function TagsPage() {
                   >
                     <span className="text-ink-900 truncate">{p.title}</span>
                     <time className="text-xs text-ink-300 flex-shrink-0">
-                      {new Date(p.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "2-digit"
-                      })}
+                      {formatDate(p.date, lang, "compact")}
                     </time>
                   </Link>
                 </li>

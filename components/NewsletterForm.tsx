@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import { t, type Lang } from "@/lib/i18n";
 
 type State = "idle" | "loading" | "success" | "error";
 
-export default function NewsletterForm() {
+export default function NewsletterForm({ lang = "en" }: { lang?: Lang }) {
+  const d = t(lang).newsletter;
   const [email, setEmail] = useState("");
   const [state, setState] = useState<State>("idle");
   const [message, setMessage] = useState("");
@@ -21,21 +23,19 @@ export default function NewsletterForm() {
       if (res.ok) {
         setState("success");
         setMessage(
-          data.already
-            ? "You're already on the list."
-            : "Check your inbox to confirm."
+          data.already ? d.already : d.confirm
         );
         setEmail("");
       } else if (res.status === 501) {
         setState("error");
-        setMessage("Newsletter isn't wired up yet. Check back soon.");
+        setMessage(d.notWired);
       } else {
         setState("error");
-        setMessage("Something went wrong. Try again?");
+        setMessage(d.error);
       }
     } catch {
       setState("error");
-      setMessage("Network error. Try again?");
+      setMessage(d.network);
     }
   }
 
@@ -58,7 +58,7 @@ export default function NewsletterForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@somewhere.com"
+          placeholder={d.placeholder}
           disabled={state === "loading"}
           className="flex-1 px-4 py-3 rounded-full bg-white/80 border border-white/90 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-lilac-400/40 disabled:opacity-50"
         />
@@ -67,7 +67,7 @@ export default function NewsletterForm() {
           disabled={state === "loading"}
           className="btn-primary justify-center disabled:opacity-70"
         >
-          {state === "loading" ? "Subscribing…" : "Subscribe"}
+          {state === "loading" ? d.loading : d.subscribe}
         </button>
       </form>
       {state === "error" && (

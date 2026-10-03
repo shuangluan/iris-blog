@@ -1,6 +1,9 @@
 import VisitorBadge from "./VisitorBadge";
+import { t, type Lang } from "@/lib/i18n";
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const d = t(lang);
+  const year = new Date().getFullYear();
   return (
     <footer className="mt-20 px-3 sm:px-4 pb-6">
       <div className="max-w-5xl mx-auto glass rounded-3xl px-6 sm:px-10 py-10 grid gap-8 md:grid-cols-3 text-sm text-ink-700">
@@ -9,27 +12,27 @@ export default function Footer() {
             iris.luan
           </div>
           <p className="leading-relaxed text-ink-500">
-            Writing from somewhere.
+            {d.footer.tagline}
           </p>
         </div>
         <div>
           <div className="text-xs uppercase tracking-widest text-lilac-600 mb-3">
-            Elsewhere
+            {d.footer.elsewhere}
           </div>
           <ul className="space-y-1.5">
             <li><a href="mailto:luanshuang.ls@gmail.com" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">hi@irisluan.com</a></li>
             <li><a href="https://x.com/Iris_LS_Luan" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">Twitter / X</a></li>
             <li><a href="https://github.com/shuangluan" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">GitHub</a></li>
-            <li><a href="/rss.xml" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">RSS feed</a></li>
+            <li><a href="/rss.xml" className="hover:text-ink-900 underline decoration-lilac-200 underline-offset-4">{d.footer.rss}</a></li>
           </ul>
         </div>
         <div>
           <div className="text-xs uppercase tracking-widest text-lilac-600 mb-3">
-            Vibe check
+            {d.footer.vibe}
           </div>
-          <VisitorBadge />
+          <VisitorBadge label={d.footer.readers} />
           <p className="mt-3 text-ink-500 text-xs leading-relaxed">
-            © {new Date().getFullYear()} Iris Luan. Built with care in {new Date().getFullYear()}.
+            {d.footer.built(year)}
           </p>
         </div>
       </div>

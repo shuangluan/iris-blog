@@ -1,12 +1,9 @@
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
 import NewsletterForm from "@/components/NewsletterForm";
-import {
-  CATEGORY_LABELS,
-  CATEGORY_BLURBS,
-  getAllPosts,
-  type Category
-} from "@/lib/posts";
+import { getAllPosts, type Category } from "@/lib/posts";
+import { t } from "@/lib/i18n";
+import { getLang } from "@/lib/lang-server";
 
 const cats: { key: Category; icon: string; from: string; to: string; text: string }[] = [
   { key: "notes", icon: "◐", from: "#fce4ec", to: "#efe9ff", text: "#7a5cb8" },
@@ -17,7 +14,10 @@ const cats: { key: Category; icon: string; from: string; to: string; text: strin
 ];
 
 export default function HomePage() {
-  const posts = getAllPosts();
+  const lang = getLang();
+  const d = t(lang);
+  const h = d.home;
+  const posts = getAllPosts(lang);
   const [hero, ...rest] = posts;
 
   return (
@@ -26,20 +26,18 @@ export default function HomePage() {
       <section className="pt-4 sm:pt-8">
         <span className="chip mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-blush-400 to-lilac-400" />
-          Writing since 2026 · Shanghai ⇄ NY
+          {h.chip}
         </span>
         <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-6">
-          Small notes from<br className="hidden sm:inline" />
-          <span className="gradient-text italic">a life between two coasts.</span>
+          {h.h1a}<br className="hidden sm:inline" />
+          <span className="gradient-text italic">{h.h1b}</span>
         </h1>
         <p className="text-lg sm:text-xl text-ink-500 max-w-2xl leading-relaxed mb-8">
-          I'm Iris. This is where I keep my longer thoughts — reflections,
-          case studies of things I've shipped, travel journals, and the small
-          products I keep making on weekends.
+          {h.intro}
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link href="/posts" className="btn-primary">Start reading →</Link>
-          <Link href="/about" className="btn-ghost">About me</Link>
+          <Link href="/posts" className="btn-primary">{h.start}</Link>
+          <Link href="/about" className="btn-ghost">{h.aboutMe}</Link>
         </div>
       </section>
 
@@ -47,9 +45,9 @@ export default function HomePage() {
       <section>
         <div className="flex items-baseline justify-between mb-6">
           <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900">
-            What you'll find here
+            {h.find}
           </h2>
-          <Link href="/tags" className="text-sm text-lilac-600 hover:text-ink-900">All tags →</Link>
+          <Link href="/tags" className="text-sm text-lilac-600 hover:text-ink-900">{h.allTags}</Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {cats.map((c) => {
@@ -72,12 +70,12 @@ export default function HomePage() {
                       className="text-sm font-medium tracking-wide"
                       style={{ color: c.text }}
                     >
-                      {c.icon} {CATEGORY_LABELS[c.key]}
+                      {c.icon} {d.categories[c.key]}
                     </span>
                     <span className="text-xs text-ink-300">{count}</span>
                   </div>
                   <p className="text-sm text-ink-500 leading-relaxed">
-                    {CATEGORY_BLURBS[c.key]}
+                    {d.blurbs[c.key]}
                   </p>
                 </div>
               </Link>
@@ -90,9 +88,9 @@ export default function HomePage() {
       {hero ? (
         <section>
           <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900 mb-6">
-            Latest
+            {h.latest}
           </h2>
-          <PostCard post={hero} featured />
+          <PostCard post={hero} featured lang={lang} />
         </section>
       ) : null}
 
@@ -100,15 +98,15 @@ export default function HomePage() {
       {rest.length ? (
         <section>
           <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900 mb-6">
-            More writing
+            {h.more}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {rest.map((p) => (
-              <PostCard key={p.slug} post={p} />
+              <PostCard key={p.slug} post={p} lang={lang} />
             ))}
           </div>
           <div className="mt-8">
-            <Link href="/posts" className="btn-ghost">See all posts →</Link>
+            <Link href="/posts" className="btn-ghost">{h.seeAll}</Link>
           </div>
         </section>
       ) : null}
@@ -117,15 +115,15 @@ export default function HomePage() {
       <section className="glass-strong rounded-3xl px-6 sm:px-10 py-10 sm:py-12 text-center">
         <span className="chip mb-4">
           <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-peach-400 to-blush-400" />
-          Newsletter
+          {h.nlChip}
         </span>
         <h3 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-ink-900 mb-3">
-          New posts, straight to <span className="gradient-text italic">your inbox.</span>
+          {h.nlTitleA} <span className="gradient-text italic">{h.nlTitleB}</span>
         </h3>
         <p className="text-ink-500 mb-6 max-w-md mx-auto">
-          One email when I publish. No threads, no "10 things", no spam.
+          {h.nlBody}
         </p>
-        <NewsletterForm />
+        <NewsletterForm lang={lang} />
       </section>
     </div>
   );

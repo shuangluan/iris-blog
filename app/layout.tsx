@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { getLang } from "@/lib/lang-server";
 
 export const viewport: Viewport = {
   themeColor: "#fff9f2",
@@ -37,8 +38,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+  const lang = getLang();
   return (
-    <html lang="en">
+    <html lang={lang === "zh" ? "zh-CN" : "en"}>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,11 +55,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col pt-3">
-        <Nav />
+        <Nav lang={lang} />
         <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14">
           {children}
         </main>
-        <Footer />
+        <Footer lang={lang} />
         <Analytics />
         <SpeedInsights />
         {plausibleDomain ? (

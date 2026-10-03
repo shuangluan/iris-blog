@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { PostMeta } from "@/lib/posts";
-import { CATEGORY_LABELS } from "@/lib/posts";
+import { t, formatDate, readingLabel, type Lang } from "@/lib/i18n";
 
 const paletteByCat: Record<string, { from: string; to: string; text: string }> = {
   notes: { from: "#fce4ec", to: "#efe9ff", text: "#7a5cb8" },
@@ -12,11 +12,14 @@ const paletteByCat: Record<string, { from: string; to: string; text: string }> =
 
 export default function PostCard({
   post,
-  featured = false
+  featured = false,
+  lang = "en"
 }: {
   post: PostMeta;
   featured?: boolean;
+  lang?: Lang;
 }) {
+  const d = t(lang);
   const p = paletteByCat[post.category] ?? paletteByCat.notes;
   return (
     <Link
@@ -33,11 +36,11 @@ export default function PostCard({
           className="absolute top-3 left-4 text-[11px] font-medium tracking-wide uppercase"
           style={{ color: p.text }}
         >
-          ◐ {CATEGORY_LABELS[post.category]}
+          ◐ {d.categories[post.category]}
         </span>
         {featured ? (
           <span className="absolute top-3 right-4 text-[10px] font-medium tracking-widest uppercase bg-white/80 backdrop-blur px-2 py-0.5 rounded-full text-ink-700">
-            Latest
+            {d.card.latest}
           </span>
         ) : null}
       </div>
@@ -50,13 +53,9 @@ export default function PostCard({
         </p>
         <div className="flex items-center justify-between text-xs text-ink-300">
           <time>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric"
-            })}
+            {formatDate(post.date, lang)}
           </time>
-          <span>{post.readingTime}</span>
+          <span>{readingLabel(post.readingMinutes, lang)}</span>
         </div>
         {post.tags?.length ? (
           <div className="mt-4 flex flex-wrap gap-1.5">

@@ -7,7 +7,10 @@
  *
  * Placement: at the end of every post, before prev/next nav.
  */
-export default function TipJar() {
+import { t, type Lang } from "@/lib/i18n";
+
+export default function TipJar({ lang = "en" }: { lang?: Lang }) {
+  const d = t(lang);
   const username = process.env.NEXT_PUBLIC_BUYMEACOFFEE_USERNAME?.trim();
   if (!username) return null;
 
@@ -17,8 +20,7 @@ export default function TipJar() {
         ☕
       </div>
       <p className="text-ink-700 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-5">
-        If this landed for you, consider dropping me a coffee — it keeps me
-        writing on the weekends instead of doom-scrolling.
+        {d.tip.body}
       </p>
       <a
         href={`https://www.buymeacoffee.com/${username}`}
@@ -26,7 +28,7 @@ export default function TipJar() {
         rel="noreferrer"
         className="btn-primary"
       >
-        Buy me a coffee →
+        {d.tip.cta}
       </a>
     </div>
   );
