@@ -33,7 +33,7 @@ export function readingLabel(minutes: number, lang: Lang) {
 }
 
 const en = {
-  nav: { home: "Home", writing: "Writing", tags: "Tags", about: "About" },
+  nav: { home: "Home", writing: "Writing", tags: "Tags", services: "Services", about: "About" },
   toggle: { label: "中文", aria: "切换到中文" },
   categories: {
     notes: "Notes",
@@ -135,7 +135,7 @@ const en = {
 export type Dict = typeof en;
 
 const zh: Dict = {
-  nav: { home: "首页", writing: "文章", tags: "标签", about: "关于" },
+  nav: { home: "首页", writing: "文章", tags: "标签", services: "服务", about: "关于" },
   toggle: { label: "EN", aria: "Switch to English" },
   categories: {
     notes: "随笔",

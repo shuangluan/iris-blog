@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: site, lastModified: new Date() },
     { url: `${site}/posts`, lastModified: new Date() },
     { url: `${site}/tags`, lastModified: new Date() },
+    { url: `${site}/services`, lastModified: new Date() },
     { url: `${site}/about`, lastModified: new Date() },
     ...posts,
     ...tags

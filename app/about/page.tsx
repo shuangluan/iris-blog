@@ -17,7 +17,8 @@ const copy = {
       "In 2026 I co-founded a company to explore AI products; currently running solo while I focus on consulting and writing."
     ],
     reachA: "The best way to reach me is",
-    reachB: "For consulting inquiries, email me directly for now, a services page is on the way.",
+    reachB: "For consulting, see",
+    servicesLink: "my services",
     currently: "Currently",
     now: [
       ["📍", "Location", "Columbia, South Carolina"],
@@ -35,7 +36,8 @@ const copy = {
       site: "This site: my personal brand home and bilingual writing desk."
     },
     elsewhere: "Elsewhere",
-    start: "Start reading →"
+    start: "Start reading →",
+    period: "."
   },
   zh: {
     chip: "关于",
@@ -46,7 +48,8 @@ const copy = {
       "2026 年我联合创办了一家公司探索 AI 产品；目前一个人在做，专注于咨询和写作。"
     ],
     reachA: "联系我最好的方式是",
-    reachB: "咨询相关的事情，暂时直接发邮件给我，服务介绍页正在准备中。",
+    reachB: "咨询相关的事情，可以先看看",
+    servicesLink: "我的服务",
     currently: "最近",
     now: [
       ["📍", "所在地", "南卡罗来纳州 Columbia"],
@@ -63,7 +66,8 @@ const copy = {
       site: "就是这个网站：我的个人品牌主页和双语写作空间。"
     },
     elsewhere: "其他地方",
-    start: "开始阅读 →"
+    start: "开始阅读 →",
+    period: "。"
   }
 };
 
@@ -92,7 +96,8 @@ export default function AboutPage() {
         ))}
         <p>
           {c.reachA}{" "}
-          <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}
+          <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
+          <Link href="/services">{c.servicesLink}</Link>{c.period}
         </p>
       </section>
 

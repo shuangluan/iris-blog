@@ -71,13 +71,19 @@ body {
   .pill-nav {
     display: inline-flex;
     align-items: center;
-    padding: 6px 14px;
+    padding: 6px 7px;
     border-radius: 999px;
     font-size: 13px;
     font-weight: 500;
+    white-space: nowrap;
     color: #463659;
     text-decoration: none;
     transition: all 0.15s ease;
+  }
+  @media (min-width: 640px) {
+    .pill-nav {
+      padding: 6px 14px;
+    }
   }
   .pill-nav:hover {
     background: rgba(255, 255, 255, 0.7);
