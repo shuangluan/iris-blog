@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 // Free 15-min intro call for the three tiers.
 const BOOK_LINK = "https://cal.com/shuang-luan-iris/15min";
 // Paid 30-min open-topic call.
-const OPEN_CALL_LINK = "https://cal.com/shuang-luan-iris/30min";
+const OPEN_CALL_LINK = "https://cal.com/shuang-luan-iris/30reviewcall";
 const EMAIL_HREF = "mailto:luanshuang.ls@gmail.com";
 const EMAIL_LABEL = "hi@irisluan.com";
 
