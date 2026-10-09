@@ -1,0 +1,109 @@
+---
+title: "Turning a creator database into a CRM: open pools, team pools, and personal pools"
+description: "Operators had a huge number of creators assigned to them, and only a small share were active. The missing piece wasn't features. It was ownership. I borrowed the lead-pool model from sales CRMs to fix it."
+date: 2026-10-08
+category: case-study
+tags: ["CRM", "internal-tools", "creator-ops", "permissions", "metrics"]
+lang: en
+translationKey: creator-crm
+---
+
+> _The short version: internal tools usually fail not because they lack features, but because nobody defined ownership or success. Decide who is responsible for which user and what "well managed" means. The features follow from there._
+
+## Context
+
+At TikTok I worked on an internal creator-management platform used by operations teams around the world. It started life as a "user database": operators imported creators, tagged them, and watched their numbers.
+
+Over the years it gained plenty of features, but its structure barely changed. Operators mostly used it for two things: bulk tagging, and tracking data after tagging.
+
+The problem: **lots of creators had an operator's name attached, but only a small share of them were active.** The system couldn't tell you which creators had gone quiet, or whose roster was churning.
+
+Meanwhile, more and more teams were asking to use it:
+
+- An operator covering several European countries had to keep switching between regional databases, and request permissions country by country.
+- Marketing teams running celebrity or news projects only needed to view data, with no operational permissions at all.
+- The music team wanted to manage artists in the same tool, without mixing their data with the creator ops team's.
+
+## Problem
+
+On the surface it looked like "the database is hard to use." Underneath were three problems:
+
+1. **Unclear ownership.** A creator could be assigned to an operator, but nobody had defined what that assignment meant, and there was no way to reclaim creators nobody was looking after.
+2. **Unclear roles.** Everyone shared the same permissions and views. People who only read data, people who run operations, and people who lead teams need very different things.
+3. **Metrics you couldn't act on.** The dashboard told you "active creators are down," but not who, or why.
+
+## My approach
+
+### 1. Borrow the lead-pool model from sales CRMs
+
+The way sales teams manage prospects maps surprisingly well onto creator operations: leads sit in a shared pool, whoever follows up claims them, and leads that go untouched get reclaimed for someone else.
+
+I split the system into four layers:
+
+| Layer | What it holds | What it answers |
+|---|---|---|
+| Open pool | Every creator lead that meets the bar and has no owner yet | Where do new creators come from? |
+| Team pool | Creators maintained by a team lead and their members | Team-level management and data |
+| Personal pool | Creators maintained by one operator | Day-to-day contact, tracking, transfers |
+| Single creator | The creator detail page | One person's full profile and history |
+
+The layers themselves aren't the point. **The rules for moving between them are.** Operators can claim from the open pool; leads can assign; creators nobody maintains can be reclaimed automatically by rule, or manually by a lead.
+
+For the first time, ownership had a lifecycle, instead of being a label that stayed forever once attached.
+
+### 2. Let users pick a role instead of gating them with permissions first
+
+The first time someone opens the tool, the page asks one question: what's your role?
+
+- **Lead Operator**: can create groups, add members, set eligibility rules, and sees everything.
+- **Operator**: manages their own creators; can't see role management.
+- **Visitor**: can only see the open pool; most actions are disabled.
+
+Choosing a role doesn't require extra approval. Genuinely sensitive actions, like viewing creator contact details or bulk exports, still go through the existing fine-grained permissions.
+
+The upside: **low barrier to entry, no lower barrier to risk.** Teams that "just want to look" no longer have to request a pile of permissions they'll never use.
+
+### 3. Every metric has to drill down to "who"
+
+Each core metric on the dashboard, such as active top creators, shows its week-over-week change, and clicking it opens a three-month trend.
+
+But the most useful design was the **diff case**: click "active top creators" and you get the list of **who joined and who dropped off** compared with last week, sorted by their qualified posts over the past seven days, with their recent content playable right there.
+
+The metric stops being a number and becomes a to-do list. When an operator sees it drop, the next step is to contact the people on that list.
+
+### 4. Design bulk actions around "what happens when it fails"
+
+Bulk add, tag, invite, remove, and export each have a per-action cap. Most of the design effort went into conflicts and failures:
+
+- **The creator being added already belongs to another operator**: don't overwrite. Send an approval request to the current owner. Until it's approved, ownership and tags stay as they are.
+- **New tags conflict with existing tags in a mutually exclusive category**: ask for confirmation.
+- **Some creators fail to be removed in a bulk removal**: the failures stay in the personal pool with ownership and tags intact. No half-finished states.
+- **Large exports**: don't make users wait on the page. When the export is ready, a bot message sends them the download link.
+
+### 5. Define success before launch
+
+At the top of the spec I split success into two views:
+
+- **User view**: usage (bi-monthly page views up xx% from today), dashboard load time (under xx seconds), number of business teams using it (at least xx), feature awareness (quiz score of at least xx), satisfaction (at least xx).
+- **Business view**: conversion from the open pool into managed creators (above xx%), and the active rate of operator-maintained creators (from xx% to xx%).
+
+Measuring feature awareness with a short quiz is something I've reused on many projects since. The most common way internal tools fail isn't building the wrong feature. It's users never learning the feature exists.
+
+## Takeaways you can use
+
+1. **Before building an internal tool, define ownership.** Who is responsible for which object, and when it gets reclaimed, matters more than any feature count.
+2. **Borrow models from mature industries.** Sales CRM lead pools, assignment, and reclaim rules have been tested for decades. Reusing them beats inventing your own.
+3. **Put role selection up front and sensitive permissions behind it.** Lower the barrier to entry, not the barrier to risk.
+4. **Every falling number should open into a list of names.** Metrics you can't drill into are for reporting, not for doing the work.
+5. **Design the failure path of bulk actions first.** Conflicts go to approval, failures roll back, no in-between states.
+6. **Treat "do users know this feature exists" as a success metric.**
+
+## A decision we changed midway
+
+The original design: when a lead removed an operator from their team, all of that operator's creators would transfer to the lead automatically.
+
+That sounds reasonable, but it causes two problems. First, the lead suddenly owns a large batch of creators they'll never maintain, which just manufactures a new set of zombie assignments. Second, the operator may only be switching teams; their creator relationships still exist.
+
+The final version: **removing someone from a team only breaks the link between operator and lead. It doesn't touch the link between operator and creators.** The confirmation dialog also shows how many creators that operator currently owns, so the lead knows what they're changing.
+
+The lesson: automatically transferring ownership looks convenient, but ownership handed to someone who won't act on it is the same as no ownership at all.

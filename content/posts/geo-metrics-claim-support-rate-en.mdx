@@ -1,0 +1,90 @@
+---
+title: "Stop watching citation rate in a GEO cold start: the metric I use instead, and the cost of a brand-name collision"
+description: "A new domain's citation rate in AI search can sit at zero for six months. Watch only that and you'll think nothing works. I switched to a metric that shows signal earlier, and found a check you should run before you name anything."
+date: 2026-10-04
+category: case-study
+tags: ["GEO", "SEO", "verbatim", "metrics", "branding", "solo-build"]
+lang: en
+translationKey: geo-metrics
+---
+
+> _The short version: citation rate is a lagging indicator, and watching it in the first months on a new domain will only discourage you. Watch claim support rate instead: how many of the claims in an AI answer your content can back up. And before you pick a name, ask AI search "what is [name]?"_
+
+## Context
+
+This follows [GEO on a brand-new domain: my landing page was invisible to AI search](/posts/geo-cold-start-static-html-en).
+
+Once the setup is done and the pages can be crawled, the next question is: **how do I know whether any of this is working?**
+
+## Three metrics, three meanings
+
+I used three metrics to measure GEO:
+
+| Metric | What it means | Type |
+|---|---|---|
+| Cite Rate | Does the AI answer list your page as a source? | Lagging: waits on trust |
+| Mention Rate | Does the AI answer mention your brand or content? | Lagging |
+| Claim Support Rate | How many of the claims in the AI answer can your content support? | Leading: shows whether your content is on target |
+
+Everyone tracks the first two. The idea behind the third came from the SEO writing of front-end engineer Liyuk: **even if your content isn't cited yet, if it covers the claims in the AI's answer, your content is pointed in the right direction. You're only missing trust signals.**
+
+## Experiment: What's the baseline for a new domain?
+
+**What I did**: ran 10 queries each on Perplexity and ChatGPT, across 5 scenarios with two phrasings each.
+
+**Result**:
+
+- Cite Rate: 1 in 20, or 5% (one fallback page on Perplexity, source position 8)
+- Mention Rate: also 5%
+- Claim Support Rate: **40% on Perplexity on average, 25% on ChatGPT**
+
+If you only looked at citation rate, the conclusion would be "it's barely working." But claim support rate says my content could back up nearly half the claims in Perplexity's answers. The content is good enough; what's missing is authority and trust.
+
+**Advice**:
+
+- Don't judge a new domain by citation rate. It may be zero for the first six months.
+- A baseline takes two to three hours to build. Re-test every four to six weeks; testing more often just shows you noise.
+
+## An unexpected finding: a brand-name collision
+
+This was the most counterintuitive lesson of the whole process.
+
+**The assumption**: the brand is Verbatim and the domain is byverbatim.com. With name and domain aligned, brand searches should find it easily.
+
+**What I did**: asked Perplexity, in a private window, "What is Verbatim? What topics does their content cover?"
+
+**Result**:
+
+- **All 10** sources were about a US data-storage brand of the same name, founded in 1969, that sells discs, drives, and storage media.
+- byverbatim.com didn't appear once.
+- Perplexity's answer: Verbatim is a consumer tech brand that sells storage media.
+
+**Conclusion**: when your brand name collides with a decades-old brand, **brand searches will basically never find your new domain.** Your brand-term traffic goes to them.
+
+**What it meant for me**:
+
+- I can't live on brand searches. I have to live on **topic traffic**.
+- To measure GEO, I don't use brand queries like "what is Verbatim" as the baseline. I use topic queries, such as "how to cold-start an AI product" or "should AI PMs learn machine learning," and track mention rate.
+- If I ever run paid ads, most brand-term clicks would go to the other company, so I'd only bid on topic terms.
+
+<Callout tone="peach">
+Spend ten minutes before you name something: ask Perplexity, ChatGPT, and Claude "What is [your brand name]?" and see whether the answers are about someone else. If they are, either change the name, or accept from day one that you'll live on topic traffic.
+</Callout>
+
+## Still testing
+
+I don't have answers to these yet. I'll update when I do:
+
+1. **Which matters more, intent match or content quality?** One page had high-quality content but only 20% claim support, because its URL and title matched the wrong search intent. I changed the URL and I'm watching.
+2. **When a fallback page that's already been discovered gets real content, does its ranking go up?**
+3. **What happens to claim support rate when a page grows from 800 to 2,000 words?**
+4. **Does llms.txt actually do anything?** Google says publicly it doesn't affect indexing. Perplexity and Anthropic haven't said.
+5. **How much does a first backlink move the needle?**
+
+## Takeaways you can use
+
+1. **On a new domain, watch claim support rate, not citation rate.** The latter lags by half a year; the former tells you early whether your content is pointed the right way.
+2. **Build a baseline once, then re-test every four to six weeks.**
+3. **Before naming, ask AI search "what is [name]?"** The cost of a collision is that your brand-term traffic belongs to someone else forever.
+4. **If you've collided, measure with topic queries**, and only bid on topic terms.
+5. **Change one variable at a time.** This is the floor for any SEO/GEO experiment; otherwise you'll never know which change did the work.
