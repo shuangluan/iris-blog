@@ -48,7 +48,7 @@ export default async function OgImage({
 
   // Load both fonts in parallel — one Latin serif, one CJK serif
   const [latinFont, cjkFont] = await Promise.all([
-    loadFont("Fraunces", `${title} ${description} irisluan.com IRIS LUAN ✿`, 500),
+    loadFont("Fraunces", `${title} ${description} irisluan.com IRIS LUAN`, 500),
     loadFont("Noto Serif SC", title + description, 500)
   ]);
 
@@ -96,7 +96,11 @@ export default async function OgImage({
               fontFamily: "serif"
             }}
           >
-            ✿
+            <svg width="26" height="26" viewBox="0 0 24 24">
+              {[0, 72, 144, 216, 288].map((r) => (
+                <ellipse key={r} cx="12" cy="6.5" rx="3.6" ry="5.2" fill="white" transform={`rotate(${r} 12 12)`} />
+              ))}
+            </svg>
           </div>
           <div style={{ fontSize: 30, fontWeight: 500, color: "#1f1735" }}>
             iris.luan

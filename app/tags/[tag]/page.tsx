@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
 import { getAllTags, getPostsByTag } from "@/lib/posts";
@@ -14,10 +15,15 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  return {
-    title: `#${params.tag}`,
-    description: `Posts tagged #${params.tag}`
-  };
+  const tag = decodeURIComponent(params.tag);
+  const count = getPostsByTag(tag, "en").length; // translated pairs count once
+  return pageMeta({
+    title: `#${tag}`,
+    description: `Posts by Iris Luan tagged #${tag}.`,
+    path: `/tags/${encodeURIComponent(tag)}`,
+    // Single-post tag pages are near-duplicates of the post itself
+    noindex: count < 2
+  });
 }
 
 export default function TagPage({ params }: { params: { tag: string } }) {

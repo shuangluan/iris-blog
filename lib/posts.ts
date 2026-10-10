@@ -90,7 +90,11 @@ function strip({ content, ...meta }: Post): PostMeta {
  * entry: the version in `lang` if it exists, otherwise the other one.
  */
 export function getAllPosts(lang?: Lang): PostMeta[] {
-  const posts = visibleSorted();
+  return collapse(visibleSorted(), lang);
+}
+
+/** Collapses translated pairs to one entry per translationKey, preferring `lang`. */
+function collapse(posts: Post[], lang?: Lang): PostMeta[] {
   if (!lang) return posts.map(strip);
   const groups = new Map<string, Post[]>();
   for (const p of posts) {
@@ -139,8 +143,13 @@ export function getAllTags(lang?: Lang): { tag: string; count: number }[] {
     .sort((a, b) => b.count - a.count);
 }
 
+// Tags differ per language (写作 vs writing), so filter before collapsing:
+// otherwise a Chinese tag shows an empty page in the English UI.
 export function getPostsByTag(tag: string, lang?: Lang): PostMeta[] {
-  return getAllPosts(lang).filter((p) => p.tags.includes(tag));
+  return collapse(
+    visibleSorted().filter((p) => p.tags.includes(tag)),
+    lang
+  );
 }
 
 export function getPostsByCategory(cat: Category, lang?: Lang): PostMeta[] {

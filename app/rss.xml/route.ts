@@ -1,4 +1,5 @@
 import { getAllPosts } from "@/lib/posts";
+import { SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -8,7 +9,7 @@ const escape = (s: string) =>
   );
 
 export function GET() {
-  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://irisluan.com";
+  const site = SITE_URL;
   const posts = getAllPosts();
   const items = posts
     .map(
@@ -25,11 +26,12 @@ export function GET() {
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Iris Luan</title>
     <link>${site}</link>
-    <description>Essays, case studies, travel notes, and side products.</description>
+    <description>${escape(SITE_DESCRIPTION)}</description>
+    <atom:link href="${site}/rss.xml" rel="self" type="application/rss+xml" />
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${items}

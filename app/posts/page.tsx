@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import PostCard from "@/components/PostCard";
 import { getAllPosts, type Category } from "@/lib/posts";
 import { t } from "@/lib/i18n";
 import { getLang } from "@/lib/lang-server";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Writing",
-  description: "Every note, case study, travel journal, and side project."
-};
+  description:
+    "Every post by Iris Luan: AI product case studies, GEO and SEO experiments, notes, travel journals, and side projects, in English and Chinese.",
+  path: "/posts"
+});
 
 const cats: Category[] = ["notes", "case-study", "travel", "life", "side-project"];
 

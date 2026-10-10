@@ -4,6 +4,38 @@ import NewsletterForm from "@/components/NewsletterForm";
 import { getAllPosts, type Category } from "@/lib/posts";
 import { t } from "@/lib/i18n";
 import { getLang } from "@/lib/lang-server";
+import type { Metadata } from "next";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_DESCRIPTION,
+  pageMeta,
+  jsonLd,
+  personSchema
+} from "@/lib/site";
+
+export const metadata: Metadata = pageMeta({
+  title: "Iris Luan · AI product notes, case studies & side projects",
+  description: SITE_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true
+});
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      inLanguage: ["en", "zh-CN"],
+      publisher: { "@id": `${SITE_URL}/#person` }
+    },
+    personSchema
+  ]
+};
 
 const cats: { key: Category; icon: string; from: string; to: string; text: string }[] = [
   { key: "notes", icon: "◐", from: "#fce4ec", to: "#efe9ff", text: "#7a5cb8" },
@@ -22,6 +54,7 @@ export default function HomePage() {
 
   return (
     <div className="space-y-16 sm:space-y-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       {/* HERO */}
       <section className="pt-4 sm:pt-8">
         <span className="chip mb-6">

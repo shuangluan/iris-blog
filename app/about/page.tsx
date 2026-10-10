@@ -1,10 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getLang } from "@/lib/lang-server";
+import { SITE_URL, pageMeta, jsonLd, personSchema } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "About",
-  description: "Who Iris is and why this blog exists."
+  description:
+    "Iris Luan is an independent AI product consultant and former ByteDance / TikTok lead PM with 7.5 years building internal platforms and creator tools.",
+  path: "/about",
+  type: "profile"
+});
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  url: `${SITE_URL}/about`,
+  mainEntity: {
+    ...personSchema,
+    description:
+      "Independent AI product consultant. 7.5 years as a product manager at ByteDance / TikTok building internal platforms and creator tools.",
+    knowsAbout: [
+      "AI product management",
+      "Product requirements documents",
+      "Generative engine optimization",
+      "Creator economy",
+      "Internal tools and CRM"
+    ],
+    alumniOf: [
+      { "@type": "CollegeOrUniversity", name: "University of Leeds" },
+      { "@type": "CollegeOrUniversity", name: "Communication University of Zhejiang" }
+    ]
+  }
 };
 
 const copy = {
@@ -82,6 +108,7 @@ export default function AboutPage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-14">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       <header>
         <span className="chip mb-5">{c.chip}</span>
         <h1 className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-ink-900 leading-[1.02]">

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/site";
 import Link from "next/link";
 import { getAllTags, getAllPosts, type Category } from "@/lib/posts";
 import { t, formatDate } from "@/lib/i18n";
 import { getLang } from "@/lib/lang-server";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Tags",
-  description: "Browse posts by tag or category."
-};
+  description:
+    "Browse Iris Luan's writing by topic: AI products, GEO, cold start, creator economy, case studies, and more.",
+  path: "/tags"
+});
 
 const cats: Category[] = ["notes", "case-study", "travel", "life", "side-project"];
 

@@ -10,6 +10,7 @@ import {
 import { Mdx } from "@/lib/mdx";
 import { t, formatDate, readingLabel, HREFLANG } from "@/lib/i18n";
 import { getLang } from "@/lib/lang-server";
+import { SITE_NAME, absoluteUrl, jsonLd, personSchema } from "@/lib/site";
 import Comments from "@/components/Giscus";
 import TipJar from "@/components/TipJar";
 import ShareButtons from "@/components/ShareButtons";
@@ -26,21 +27,44 @@ export async function generateMetadata({
   const post = getPost(params.slug);
   if (!post) return { title: "Not found" };
   const translation = getTranslation(post);
+  const path = `/posts/${post.slug}`;
   // hreflang links: also read by the language toggle to jump to the translation
-  const languages: Record<string, string> = {
-    [HREFLANG[post.lang]]: `/posts/${post.slug}`
-  };
-  if (translation) languages[HREFLANG[translation.lang]] = `/posts/${translation.slug}`;
+  const languages: Record<string, string> = { [HREFLANG[post.lang]]: path };
+  if (translation) {
+    languages[HREFLANG[translation.lang]] = `/posts/${translation.slug}`;
+    // English is the site default, so it's the fallback for other locales
+    languages["x-default"] = post.lang === "en" ? path : `/posts/${translation.slug}`;
+  }
   return {
     title: post.title,
     description: post.description,
-    alternates: { languages },
+    keywords: post.tags,
+    authors: [{ name: "Iris Luan", url: absoluteUrl("/about") }],
+    alternates: {
+      canonical: path,
+      languages,
+      types: { "application/rss+xml": "/rss.xml" }
+    },
     openGraph: {
       title: post.title,
       description: post.description,
+      url: path,
+      siteName: SITE_NAME,
       type: "article",
+      locale: post.lang === "zh" ? "zh_CN" : "en_US",
+      ...(translation
+        ? { alternateLocale: translation.lang === "zh" ? "zh_CN" : "en_US" }
+        : {}),
       publishedTime: post.date,
+      authors: [absoluteUrl("/about")],
+      section: t("en").categories[post.category],
       tags: post.tags
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      creator: "@iris_ls_luan"
     }
   };
 }
@@ -59,8 +83,43 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   const prev = idx >= 0 ? all[idx + 1] : undefined;
   const next = idx > 0 ? all[idx - 1] : undefined;
 
+  const url = absoluteUrl(`/posts/${post.slug}`);
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: post.title,
+        description: post.description,
+        url,
+        mainEntityOfPage: url,
+        image: `${url}/opengraph-image`,
+        datePublished: post.date,
+        dateModified: post.date,
+        inLanguage: post.lang === "zh" ? "zh-CN" : "en",
+        articleSection: t("en").categories[post.category],
+        keywords: post.tags.join(", "),
+        author: personSchema,
+        publisher: personSchema,
+        ...(translation
+          ? { workTranslation: { "@id": `${absoluteUrl(`/posts/${translation.slug}`)}#article` } }
+          : {})
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Writing", item: absoluteUrl("/posts") },
+          { "@type": "ListItem", position: 3, name: post.title, item: url }
+        ]
+      }
+    ]
+  };
+
   return (
     <article className="max-w-2xl mx-auto" lang={post.lang === "zh" ? "zh-CN" : "en"}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       <div className="mb-8 text-sm flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/posts"
@@ -94,10 +153,12 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-300">
           <span className="inline-flex items-center gap-1.5">
             <span className="w-5 h-5 rounded-full bg-gradient-to-br from-blush-400 to-lilac-400" />
-            <span className="text-ink-500">Iris Luan</span>
+            <Link href="/about" rel="author" className="text-ink-500 hover:text-ink-900">
+              Iris Luan
+            </Link>
           </span>
           <span>·</span>
-          <time>{formatDate(post.date, lang, "long")}</time>
+          <time dateTime={post.date}>{formatDate(post.date, lang, "long")}</time>
           <span>·</span>
           <span>{readingLabel(post.readingMinutes, lang)}</span>
         </div>
@@ -118,7 +179,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       ) : null}
 
       <ShareButtons
-        url={`${process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://irisluan.com"}/posts/${post.slug}`}
+        url={url}
         title={post.title}
         description={post.description}
         lang={lang}

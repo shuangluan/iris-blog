@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { getLang } from "@/lib/lang-server";
+import { SITE_URL, pageMeta, jsonLd, personSchema } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata: Metadata = pageMeta({
+  title: "AI Product Consulting Services",
   description:
-    "AI product consulting: AI PM portfolio PRD rewrite ($200), idea to buildable AI PRD ($699), monthly light advisory ($1,800/mo), and 1:1 calls on career planning, visa experience and moving into AI / PM ($50 / 30 min)."
-};
+    "AI product consulting from a former ByteDance / TikTok lead PM: AI PM portfolio PRD rewrite ($200), idea to buildable AI PRD ($699), monthly advisory ($1,800/mo), and 1:1 calls ($50 / 30 min).",
+  path: "/services"
+});
 
 // Free 15-min intro call for the three tiers.
 const BOOK_LINK = "https://cal.com/shuang-luan-iris/15min";
@@ -231,9 +233,55 @@ const copy: Record<"en" | "zh", Copy> = {
 
 export default function ServicesPage() {
   const c = copy[getLang()];
+  const price = (p: string) => p.replace(/[^0-9.]/g, "");
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": `${SITE_URL}/services#service`,
+        name: "Iris Luan · AI Product Consulting",
+        url: `${SITE_URL}/services`,
+        description: c.intro,
+        provider: personSchema,
+        areaServed: "Worldwide",
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: c.chip,
+          itemListElement: [
+            ...c.tiers.map((tier) => ({
+              "@type": "Offer",
+              name: tier.name,
+              description: tier.buyer,
+              price: price(tier.price),
+              priceCurrency: "USD",
+              url: STRIPE_LINKS[tier.id] || `${SITE_URL}/services`
+            })),
+            {
+              "@type": "Offer",
+              name: c.openCall.name,
+              description: c.openCall.body,
+              price: price(c.openCall.price),
+              priceCurrency: "USD",
+              url: OPEN_CALL_LINK
+            }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: c.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a }
+        }))
+      }
+    ]
+  };
 
   return (
     <div className="space-y-16 sm:space-y-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       <header>
         <span className="chip mb-5">{c.chip}</span>
         <h1 className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-5">

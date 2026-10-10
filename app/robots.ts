@@ -1,9 +1,12 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
-  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://irisluan.com";
   return {
-    rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${site}/sitemap.xml`
+    // AI crawlers (GPTBot, PerplexityBot, ClaudeBot...) are allowed on purpose:
+    // being cited by AI search is a goal for this site.
+    rules: [{ userAgent: "*", allow: "/", disallow: ["/api/"] }],
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL
   };
 }
