@@ -1,0 +1,206 @@
+---
+title: "I ran SEO/GEO on a new domain for 7 weeks: 11 experiments, and most of the results contradicted the tutorials"
+description: "Cold-start notes from an indie product. The sample is a single website, so the conclusions may not generalize, but every number is real."
+date: 2026-10-20
+category: side-project
+tags: ["verbatim", "SEO", "GEO", "cold-start", "build-in-public"]
+lang: en
+translationKey: seo-geo-7-weeks
+---
+
+> Cold-start notes from an indie product. The sample is a single website, so the conclusions may not generalize, but every number is real.
+
+---
+
+## Background
+
+At the end of August I launched a small product called Verbatim (byverbatim.com). What it does is simple: it pulls direct quotes from AI founders and product people out of Chinese and English podcasts, newsletters, and long-form interviews, and organizes them by specific question. Every quote comes with the speaker, a timestamp, and the original link. For example, on the page for "How do you find the first 100 users for an AI product?", three founders' real approaches sit side by side.
+
+Before launch I set myself a goal: **no in-person outreach, no reposting by friends, only SEO and GEO (getting AI search engines to cite you) for the cold start, and see whether it actually works.**
+
+Seven weeks later, the answer: the method works mechanically, but for my product it brings in almost none of the target users. This post breaks down the 11 experiments along the way: which moves worked, which were traps, and the one thing I most wish I had known on day one.
+
+The conclusions first, if you're short on time:
+
+- The technical SEO setup is easy. A new domain can be fully indexed by Google in about two weeks.
+- JavaScript-rendered single-page apps (SPAs) are nearly invisible to AI crawlers. This was the most expensive mistake I made.
+- In the first month, the chance of a new domain being cited in AI search is close to zero. Judging success by citation rate will make you give up too early.
+- After I added llms.txt and structured data, AI engines went from completely wrong to nearly accurate about "who you are." But that won't save your ranking in topic searches.
+- If your product curates content, AI search may cite the original sources you curated instead of you.
+- **Most important: before you start, confirm that your target users actually use search engines, and search in the language you write in.** I skipped this step and wasted a month.
+
+---
+
+## Part 1: Infrastructure (weeks 0 to 2)
+
+### Experiment 1: SEO infrastructure takes one day
+
+I did the textbook checklist. robots.txt explicitly allows the AI crawlers GPTBot, OAI-SearchBot, PerplexityBot, and Claude-SearchBot. A sitemap.xml is submitted to Google Search Console and Bing Webmaster Tools. Every page has a title, meta description, and canonical tag.
+
+Before launch, I used curl to request the homepage once with each of those four crawlers' User-Agents, and confirmed that every request returned 200 and wasn't blocked by Cloudflare's bot protection. Many people skip this step, but if crawlers can't get in, everything after it is wasted.
+
+Result: about two weeks later, Search Console showed 11 pages indexed from the 10 URLs in my sitemap (Google found the extra one on its own).
+
+**Takeaway:** Modern SEO infrastructure has no real technical barrier, and a new domain isn't an obstacle. Don't spend more than a day on this.
+
+### Experiment 2: Most Search Console "errors" don't need fixing
+
+After indexing, Search Console filled up with alarming statuses: Page with redirect, Alternate page with proper canonical tag, Duplicate without user-selected canonical.
+
+When I clicked into each one, most turned out to be normal behavior. For example, `http://byverbatim.com/` was marked Failed. That's just Cloudflare forcing HTTP to HTTPS. Once Google confirms the redirect, it stops indexing the HTTP version, which is exactly what you want.
+
+Only one actually needed fixing, and it was a hole I dug myself (see Experiment 5).
+
+**Takeaway:** When reading Search Console, first check whether the URL's redirect is intentional. If it is, Failed doesn't mean broken.
+
+---
+
+## Part 2: The traps I fell into
+
+### Experiment 3: To AI crawlers, my SPA homepage was one line saying "JavaScript required"
+
+My homepage was generated with an AI design tool, and the interactions were lovely: a search box, preset questions, expandable speaker cards. Then one day I opened index.html in a text editor and found the entire page's content packed into a JavaScript bundle. The HTML itself contained only "This page requires JavaScript to display," and the page title was "Bundled Page."
+
+That means any crawler that doesn't execute JavaScript sees an empty shell.
+
+A control group happened to exist. I later hand-wrote plain static HTML pages for each topic (`/topics/xxx`). One of them, a placeholder page still being indexed, showed up in the source list of a Perplexity search within days of going live, ranked eighth. The homepage was never cited in a single topic search during the entire test.
+
+Worse, I once tried to edit one line of text directly inside that bundle, broke the JSON in it, and turned the whole homepage blank. I had to roll back.
+
+**Takeaway:** If you care about GEO, the core content of every page must be written directly in the HTML and visible on first load. Before generating pages with an AI design tool or an SPA framework, make sure it can export static HTML.
+
+### Experiment 4: One straight quote in Chinese JSON broke the structured data for a whole page
+
+I added FAQPage and Quotation structured data (JSON-LD) to every topic page. Google's Rich Results Test reported "Unparsable structured data."
+
+The cause was almost funny. To emphasize a word in a Chinese answer, I used a straight double quote `"`, which ends the field early inside a JSON string. I made the same mistake twice, the second time while expanding a page.
+
+Another small trap: when I counted how many Questions a page had with `grep -c`, it returned 1, because the whole JSON block sits on a single line. To count actual occurrences, use `grep -o ... | wc -l`.
+
+**Takeaway:** In Chinese structured data, always use 「」 or full-width quotation marks. Run the Rich Results Test after every deploy instead of trusting your own curl output.
+
+### Experiment 5: SearchAction structured data made Google crawl a page that doesn't exist
+
+I added WebSite SearchAction markup to the homepage, with the template URL `https://byverbatim.com/?q={search_term_string}`. A few weeks later Search Console reported that URL as a "Duplicate without user-selected canonical." Google had treated the template variable as a real address and crawled it.
+
+The fix was to add `Disallow: /*?q=` to robots.txt, then click "Validate fix" in Search Console.
+
+**Takeaway:** If your site doesn't actually have parameter-based on-site search, don't add SearchAction. If you do add it, block the query parameter in robots.txt ahead of time.
+
+### Experiment 6: My brand name collided with a brand from 1969
+
+I asked Perplexity "What is Verbatim?" All 10 sources were about a storage brand that makes discs, USB drives, and external hard drives, and so was the answer. My site didn't appear once.
+
+I never thought to check this before launch. A few weeks later another one appeared: playverbatim.com, a word game, started showing up among the sources for the same kind of query.
+
+**Takeaway:** Before you pick a name, search "what is [your name]" once each in Perplexity, ChatGPT, and Google. If you collide with an established brand, accept that brand-name traffic isn't yours, and that you can only be found through topic searches. Also, don't use your brand name in baseline queries, or the data will be meaningless.
+
+---
+
+## Part 3: What AI search actually cites
+
+### Experiment 7: Build a baseline, and don't look only at citation rate
+
+In week 3 I ran a systematic test: 5 topics, two phrasings each (a direct question and a scenario-based one), run once each on Perplexity and ChatGPT, for 20 runs in total. For each run I recorded four things: whether the answer mentioned Verbatim, whether my link appeared among the sources, what position it held, and how many of the specific claims in the answer could be traced to my page. I call that last one the Claim Support Rate, a metric I picked up from an SEO article by a frontend developer friend.
+
+Results:
+
+- Citations: 1 out of 20, the placeholder page mentioned above, ranked eighth.
+- Claim Support Rate: about 40% on average for Perplexity, about 25% for ChatGPT.
+
+In other words, a good share of the claims in the AI's answers overlapped with what was on my page, but it cited someone else.
+
+**Takeaway:** A new domain's citation rate in its first month is almost certainly zero, and judging by it will make you quit too early. Content overlap is an earlier signal. If it's high, your content direction is right and what's missing is trust (backlinks, domain age). If it's low, the questions you're answering aren't the ones users are asking.
+
+### Experiment 8: The three engines behave completely differently
+
+- **Perplexity** discovers new pages fastest; they can appear in its source list within days. For questions asked in Chinese, it mostly cites Chinese content sites such as Woshipm, InfoQ, CSDN, and 36Kr.
+- **ChatGPT** has a much stronger preference for authoritative sources. For "How do you find the first users for an AI product?", it cited exactly one source: Paul Graham's *Do Things That Don't Scale*. In 5 of the other 10 runs it didn't search the web at all and answered from its training data, in which case a new site has no chance.
+- **Claude** I didn't test. The web version requires a login and web search requires a paid account, and I judged the extra information wasn't worth it.
+
+One unexpected finding: I searched the same question, "How much ML does an AI PM need to learn?", a month apart, and Perplexity's sources were almost entirely replaced. In early September the top results were job platforms and company blogs; in early October they were personal Substacks and learning roadmaps on GitHub. It's one query, but it reminded me that source rankings in AI search shift quickly, and a single test doesn't represent the long-term picture.
+
+**Takeaway:** During cold start, prioritize Perplexity data. ChatGPT's feedback lags far behind, but it relies on Bing's index, so make sure you submit to Bing Webmaster Tools.
+
+### Experiment 9: If the intent doesn't match, good content doesn't matter
+
+I had a topic called "What pitfalls have Chinese AI products hit when going global?", featuring three founders talking about cultural differences and rebuilding their playbooks. Its content overlap was only 20%, and 0 on ChatGPT.
+
+The sources explained why. Perplexity read the question as being about compliance and cited GDPR explainers, export controls, and law firm articles. ChatGPT read it as geopolitics and cited Reuters, the Financial Times, and the US Treasury. Neither engine thought the user wanted to hear founders' stories.
+
+I renamed the page to "What pitfalls have Chinese AI founders hit when going global?", changed the URL (with a 301 redirect from the old one), stated clearly at the top what the page does and doesn't cover, and pointed readers looking for compliance content to external resources. The results are still pending.
+
+**Takeaway:** Before you write, search your target question in AI search once and look at what kind of content it cites. If it's not the kind you're about to write, either change the question or accept that you won't win that query.
+
+### Experiment 10: llms.txt helps, but not the way you'd expect
+
+llms.txt is a community proposal: a plain-text file that tells AI what your site is. Google has said officially that it doesn't affect search. I added one in mid-September, spelling out the site's purpose, the topics it covers, the topics it explicitly doesn't, its data sources, and how to cite it.
+
+Afterward I tested in week 3 and week 4 with the same two queries:
+
+| Query | Mid-September (before adding it) | Week 3 | Week 4 |
+|---|---|---|---|
+| "What is byverbatim.com?" | I wasn't in the sources; the answer was about the storage brand | 5 of 10 sources were my pages; the answer was accurate | My homepage was the #1 source; the answer was still accurate |
+| "What real founder experience is there on AI product cold starts?" | I wasn't in the sources | I wasn't in the sources | I wasn't in the sources |
+
+The answer quality for the first query changed dramatically. Perplexity wrote: "What it aims to do is reorganize first-hand experience scattered across long interviews, podcasts, and creator newsletters around specific questions, forming a library of comparable experience samples." That's clearer than my own description. In week 4 it even got the product's status and pricing right.
+
+For the second query, my pages never appeared once in four weeks.
+
+To be clear, the site also had static topic pages and structured data during this period, and time itself played a role, so I can't credit all of the change to llms.txt. The more accurate statement: the combination of llms.txt, static pages, and structured data took AI's understanding of "what this site is" from completely wrong to nearly accurate within three weeks, and it was still stable a week later.
+
+**Takeaway:** This setup is defensive. When someone searches for your site directly, it makes sure AI describes you correctly. But it won't help you beat InfoQ and Woshipm on topic queries like "AI cold start." Winning topic traffic takes backlinks, content depth, and time.
+
+### A finding that made me rethink positioning: original sources take the curator's spot
+
+In week 4, while testing the "AI product cold start" query, I noticed that one of Perplexity's sources was the Apple Podcasts page for an episode of 42章经, a Chinese tech podcast.
+
+What Verbatim does is pull quotes from podcasts like 42章经 and organize them into pages. In the eyes of AI search, the original podcast and my curated page are competing for the same spot, and the original naturally has the stronger claim: it's first-hand, it has history, and it has authority.
+
+This is a warning for every content-curation product. If your page just relocates what other people said, AI engines have no reason to cite you instead of the original. To get cited, a curator has to provide something the original doesn't, such as side-by-side comparison across sources, counterintuitive synthesis, or a structure reorganized around specific decisions. My pages do some of this, but it sits below the quotes and isn't prominent enough. That's the direction I want to adjust next.
+
+A related finding: in August 2023 Google restricted FAQ rich results to a small number of authoritative government and health sites, so the Rich Results Test showed only my breadcrumbs, not the FAQ. But FAQPage structured data is still valid Schema, and AI engines can still read it. In 2026, the case for adding FAQPage comes almost entirely from GEO, not traditional SEO.
+
+---
+
+## Part 4: What I most wish I'd known on day one
+
+### Experiment 11: My target users were never on this road
+
+In week 7 I opened Cloudflare's visitor geography. The top three countries over 24 hours were the Netherlands (44), Belgium (39), and the US (24).
+
+The Netherlands and Belgium host large cloud and search-engine data centers, so those visits were most likely crawlers, not people. PostHog, which filters out bots, showed 96 visitors over 30 days: 2 from organic search, 1 from AI engines, and the rest essentially direct visits, meaning me and the people around me.
+
+The good news: the people who did click in stayed 4 minutes and 22 seconds on average, which means the content itself holds attention. But almost no one left an email.
+
+My target users are Chinese professionals aged 30 to 40 working in AI outside China. Looking back, this group has two traits, and each one defeats SEO/GEO on its own:
+
+1. **Language mismatch:** They work in English and mostly search AI-related questions in English. Every page I wrote was in Chinese.
+2. **Channel mismatch:** They get their AI information from X, LinkedIn, Hacker News, and assorted WeChat groups, not from search engines.
+
+The method itself wasn't the problem. The problem was that the combination of users, channel, and language didn't line up from the start.
+
+**If I did it again, I'd run through this checklist on day one:**
+
+- When my target users hit this kind of problem, is their first instinct to search, or to ask someone and scroll social media?
+- Is the language they search in the same as the one I write in?
+- Does each question I want to answer get at least a few hundred searches a month?
+
+If two of the three answers are no, don't make SEO/GEO your main cold-start channel. It can serve as an archive and a long-term asset, but don't count on it to bring in users during the first few months.
+
+---
+
+## What's next
+
+I'll keep maintaining Verbatim, but I'm no longer pursuing commercialization. It's now my testing ground for SEO/GEO methods. Two experiments are running:
+
+- I expanded the "How much ML does an AI PM need to learn?" page from roughly 800 to roughly 2,000 Chinese characters, adding three learning paths based on background, four situations where you shouldn't learn ML, and a three-month hands-on checklist. In early November I'll check whether it makes Perplexity's top 10 sources.
+- This post itself is an experiment: it's Verbatim's first external link, and I'll track the visits and AI citation changes it brings.
+
+If you want to see what the topic pages mentioned here actually look like (they're in Chinese):
+
+- [How do you find the first 100 users for an AI product?](https://byverbatim.com/topics/ai-cold-start)
+- [How much ML does an AI PM need to learn?](https://byverbatim.com/topics/ai-pm-ml-depth)
+- [What pitfalls have Chinese AI founders hit when going global?](https://byverbatim.com/topics/china-ai-founder-going-global)
+
+If you're also doing SEO or GEO for your own product, I'd love to compare notes on the traps you've hit. In the next post I'll share the results of these two experiments.
