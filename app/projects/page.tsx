@@ -33,14 +33,9 @@ export default function ProjectsPage() {
           const related = project.relatedNeedle
             ? getRelatedPosts(lang, project.relatedNeedle)
             : [];
+          const shown = related.slice(0, 3);
           const external = project.url?.startsWith("http");
-          const links: { href: string; label: string; external?: boolean }[] = [];
-          if (project.url && project.urlLabel) {
-            links.push({ href: project.url, label: project.urlLabel, external });
-          }
-          for (const post of related) {
-            links.push({ href: `/posts/${post.slug}`, label: post.title });
-          }
+          const hasRelated = Boolean(project.url && project.urlLabel) || related.length > 0;
           return (
             <article key={project.id} className="project">
               <div className="project-top">
@@ -64,40 +59,52 @@ export default function ProjectsPage() {
               ) : project.oneLineTodo ? (
                 <p className="one-line">{d.todoLine}</p>
               ) : null}
-              {project.role || project.roleTodo ? (
-                <p className="project-meta">
-                  <span className="meta-label">{d.role}</span>
-                  {" · "}
-                  {project.role ? project.role[lang] : d.todoRole}
-                </p>
-              ) : null}
-              {project.period ? (
-                <p className="project-meta">
-                  <span className="meta-label">{d.period}</span>
-                  {" · "}
-                  {project.period[lang]}
-                </p>
-              ) : null}
-              {links.length ? (
-                <p className="project-meta">
-                  <span className="meta-label">{d.related}</span>
-                  {" · "}
-                  <span className="related-links">
-                    {links.map((link, i) => (
-                      <span key={link.href}>
-                        {i > 0 ? " · " : null}
-                        <a
-                          href={link.href}
-                          target={link.external ? "_blank" : undefined}
-                          rel={link.external ? "noreferrer" : undefined}
-                        >
-                          {link.label}
-                        </a>
-                      </span>
-                    ))}
-                  </span>
-                </p>
-              ) : null}
+              <div className="meta-rows">
+                {project.role || project.roleTodo ? (
+                  <div className="meta-row">
+                    <span className="meta-label">{d.role}</span>
+                    <span className="meta-value">
+                      {project.role ? project.role[lang] : d.todoRole}
+                    </span>
+                  </div>
+                ) : null}
+                {project.period ? (
+                  <div className="meta-row">
+                    <span className="meta-label">{d.period}</span>
+                    <span className="meta-value">{project.period[lang]}</span>
+                  </div>
+                ) : null}
+                {hasRelated ? (
+                  <div className="meta-row">
+                    <span className="meta-label">{d.related}</span>
+                    <ul className="related-list">
+                      {project.url && project.urlLabel ? (
+                        <li>
+                          <a
+                            href={project.url}
+                            target={external ? "_blank" : undefined}
+                            rel={external ? "noreferrer" : undefined}
+                          >
+                            {project.urlLabel}
+                          </a>
+                        </li>
+                      ) : null}
+                      {shown.map((post) => (
+                        <li key={post.slug}>
+                          <a href={`/posts/${post.slug}`}>{post.title}</a>
+                        </li>
+                      ))}
+                      {related.length > 3 && project.relatedNeedle ? (
+                        <li>
+                          <a href={`/writing?tag=${encodeURIComponent(project.relatedNeedle)}`}>
+                            {d.allPosts(related.length)}
+                          </a>
+                        </li>
+                      ) : null}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
             </article>
           );
         })}

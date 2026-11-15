@@ -179,9 +179,15 @@ export function getWritingFilters(
   return [...categories, ...topics];
 }
 
+function sameTag(a: string, b: string) {
+  return a === b || a.toLowerCase() === b.toLowerCase();
+}
+
 export function filterPosts(posts: PostMeta[], tag?: string): PostMeta[] {
   if (!tag) return posts;
-  return posts.filter((p) => p.category === tag || p.tags.includes(tag));
+  return posts.filter(
+    (p) => p.category === tag || p.tags.some((item) => sameTag(item, tag))
+  );
 }
 
 /**
