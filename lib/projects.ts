@@ -26,10 +26,15 @@ export const PROJECTS: Project[] = [
     id: "zeai",
     name: { en: "ZEAI", zh: "ZEAI" },
     status: "current",
-    oneLineTodo: true,
-    role: { en: "Solo builder", zh: "独立开发" },
+    oneLine: {
+      en: "Affiliate-ops autopilot for US TikTok Shop brands doing $1M–$20M GMV.",
+      zh: "给美国 GMV 100 万到 2000 万美元的 TikTok Shop 品牌做的达人运营自动化工具。"
+    },
+    role: { en: "Founder · solo builder", zh: "创始人 · 独立开发" },
+    period: { en: "2026 –", zh: "2026 –" },
     url: "https://zeai.ai",
-    urlLabel: "zeai.ai"
+    urlLabel: "zeai.ai",
+    showOnHome: true
   },
   {
     id: "verbatim",
@@ -68,17 +73,5 @@ export const PROJECTS: Project[] = [
       zh: "TikTok 内部员工效率运营平台，支持全球团队多角色协作。（细节已脱敏）"
     },
     role: { en: "PM, ByteDance / TikTok", zh: "产品经理，字节跳动 / TikTok" }
-  },
-  {
-    id: "unnamed-2026",
-    name: { en: "[Name TBD]", zh: "[项目名待填]" },
-    nameTodo: true,
-    status: "unknown",
-    oneLine: {
-      en: "In 2026 I co-founded a company to explore AI products; currently running solo while I focus on consulting and writing.",
-      zh: "2026 年我联合创办了一家公司探索 AI 产品；目前一个人在做，专注于咨询和写作。"
-    },
-    roleTodo: true,
-    period: { en: "2026 –", zh: "2026 –" }
   }
 ];

@@ -10,6 +10,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getLang } from "@/lib/lang-server";
 import { getPost } from "@/lib/posts";
+import type { Lang } from "@/lib/i18n";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 // Static 400/600. This Next.js font build rejects `axes` unless the face is
@@ -88,12 +89,15 @@ export const metadata: Metadata = {
   }
 };
 
-/** Article pages declare the post's own language; everything else follows the UI. */
-function htmlLang(uiLang: "en" | "zh") {
-  const m = headers().get("x-pathname")?.match(/^\/posts\/([^/]+)$/);
-  const post = m ? getPost(decodeURIComponent(m[1])) : null;
-  const lang = post?.lang ?? uiLang;
-  return lang === "zh" ? "zh-CN" : "en";
+/**
+ * Page language: an article uses the post's language; every other page uses
+ * the UI cookie. The nav follows this, so a Chinese post shows 首页 / 文章 / …
+ */
+function pageLang(uiLang: Lang, pathname: string): Lang {
+  const m = pathname.match(/^\/posts\/([^/]+)$/);
+  if (!m) return uiLang;
+  const post = getPost(decodeURIComponent(m[1]));
+  return post?.lang ?? uiLang;
 }
 
 export default function RootLayout({
@@ -105,14 +109,15 @@ export default function RootLayout({
   const lang = getLang();
   const pathname = headers().get("x-pathname") ?? "/";
   const search = headers().get("x-search") ?? "";
+  const navLang = pageLang(lang, pathname);
   const home = pathname === "/";
   return (
     <html
-      lang={htmlLang(lang)}
+      lang={navLang === "zh" ? "zh-CN" : "en"}
       className={`${serif.variable} ${sans.variable} ${mono.variable} ${serifSc.variable}`}
     >
       <body>
-        <Nav lang={lang} pathname={pathname} from={`${pathname}${search}`} />
+        <Nav lang={navLang} pathname={pathname} from={`${pathname}${search}`} />
         <main className={home ? "site-main" : "site-main site-main-page"}>{children}</main>
         <Footer lang={lang} />
         <Analytics />
