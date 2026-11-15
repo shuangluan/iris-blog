@@ -279,62 +279,54 @@ export default function ServicesPage() {
     ]
   };
 
+  const headline = /[A-Za-z0-9]$/.test(c.h1a) ? `${c.h1a} ${c.h1b}` : `${c.h1a}${c.h1b}`;
+
   return (
-    <div className="space-y-16 sm:space-y-20">
+    <div className="measure page-stack">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      <header>
-        <span className="chip mb-5">{c.chip}</span>
-        <h1 className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-ink-900 leading-[1.02] mb-5">
-          {c.h1a}
-          <br className="hidden sm:inline" />{" "}
-          <span className="gradient-text italic">{c.h1b}</span>
-        </h1>
-        <p className="text-lg text-ink-500 max-w-2xl leading-relaxed">{c.intro}</p>
+      <header className="page-head">
+        <p className="eyebrow">{c.chip}</p>
+        <h1 className="page-title">{headline}</h1>
+        <p className="dek">{c.intro}</p>
       </header>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section>
         {c.tiers.map((tier) => {
           const pay = STRIPE_LINKS[tier.id];
           const primaryIsPay = Boolean(pay) && !tier.callFirst;
           return (
-            <article key={tier.id} className="flex flex-col glass rounded-3xl p-6 sm:p-7">
-              <div className="h-6">
-                {tier.tag ? <span className="chip">{tier.tag}</span> : null}
-              </div>
-              <h2 className="mt-4 font-display text-2xl font-medium tracking-tight text-ink-900 leading-tight">
-                {tier.name}
-              </h2>
-              <p className="mt-4">
-                <span className="font-display text-4xl font-medium text-ink-900">{tier.price}</span>
-                <span className="text-sm text-ink-300"> {tier.unit}</span>
+            <article key={tier.id} className="offer">
+              {tier.tag ? <p className="eyebrow">{tier.tag}</p> : null}
+              <h2>{tier.name}</h2>
+              <p className="offer-meta">
+                <span className="offer-price">{tier.price}</span>
+                {tier.unit} · {tier.timeline}
               </p>
-              <p className="mt-1 text-xs uppercase tracking-widest text-lilac-600">
-                {tier.timeline}
-              </p>
-              <p className="mt-5 text-sm text-ink-500 leading-relaxed">
-                <span className="font-medium text-ink-900">{c.forWho} · </span>
+              <p className="project-meta">
+                <span className="meta-label">{c.forWho}</span>
+                {" · "}
                 {tier.buyer}
               </p>
-              <ul className="mt-4 mb-6 space-y-2 text-sm text-ink-700 leading-relaxed list-disc pl-5 marker:text-lilac-400">
-                {tier.deliverables.map((d) => (
-                  <li key={d}>{d}</li>
+              <ul>
+                {tier.deliverables.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
-              <div className="mt-auto flex flex-col gap-2.5">
+              <div className="offer-actions">
                 {primaryIsPay ? (
                   <>
-                    <a href={pay} className="btn-primary justify-center">{c.payNow}</a>
-                    <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn-ghost justify-center">
+                    <a href={pay} className="btn btn-primary">{c.payNow}</a>
+                    <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn btn-ghost">
                       {c.bookCall}
                     </a>
                   </>
                 ) : (
                   <>
-                    <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn-primary justify-center">
+                    <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn btn-primary">
                       {c.bookCall}
                     </a>
                     {pay ? (
-                      <a href={pay} className="btn-ghost justify-center">{c.payNow}</a>
+                      <a href={pay} className="btn btn-ghost">{c.payNow}</a>
                     ) : null}
                   </>
                 )}
@@ -342,77 +334,59 @@ export default function ServicesPage() {
             </article>
           );
         })}
-      </section>
 
-      <section className="glass rounded-3xl p-6 sm:p-7 flex flex-col md:flex-row md:items-center gap-6 md:gap-10 -mt-12 sm:-mt-16">
-        <div className="md:w-56 flex-shrink-0">
-          <span className="chip">{c.openCall.tag}</span>
-          <h2 className="mt-4 font-display text-2xl font-medium tracking-tight text-ink-900 leading-tight">
-            {c.openCall.name}
-          </h2>
-          <p className="mt-3">
-            <span className="font-display text-4xl font-medium text-ink-900">{c.openCall.price}</span>
-            <span className="text-sm text-ink-300"> {c.openCall.unit}</span>
+        <article className="offer">
+          <p className="eyebrow">{c.openCall.tag}</p>
+          <h2>{c.openCall.name}</h2>
+          <p className="offer-meta">
+            <span className="offer-price">{c.openCall.price}</span>
+            {c.openCall.unit}
           </p>
-        </div>
-        <div className="flex-1">
-          <p className="text-sm text-ink-500 leading-relaxed">{c.openCall.body}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <p className="project-meta">{c.openCall.body}</p>
+          <ul>
             {c.openCall.topics.map((topic) => (
-              <span key={topic} className="chip">{topic}</span>
+              <li key={topic}>{topic}</li>
             ))}
+          </ul>
+          <p className="meta-label" style={{ marginTop: "0.75rem" }}>{c.openCall.note}</p>
+          <div className="offer-actions">
+            <a href={OPEN_CALL_LINK} target="_blank" rel="noreferrer" className="btn btn-primary">
+              {c.openCall.cta}
+            </a>
           </div>
-          <p className="mt-4 text-xs text-ink-300">{c.openCall.note}</p>
-        </div>
-        <a
-          href={OPEN_CALL_LINK}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-primary justify-center flex-shrink-0"
-        >
-          {c.openCall.cta}
-        </a>
+        </article>
       </section>
 
       <section>
-        <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900 mb-6">
-          {c.stepsTitle}
-        </h2>
-        <ol className="grid gap-4 md:grid-cols-3">
-          {c.steps.map((s, i) => (
-            <li key={s.title} className="glass rounded-2xl p-5">
-              <span className="inline-flex w-8 h-8 items-center justify-center rounded-full bg-gradient-to-br from-blush-400 to-lilac-400 text-white text-sm font-medium">
-                {i + 1}
-              </span>
-              <p className="mt-3 font-medium text-ink-900">{s.title}</p>
-              <p className="mt-1 text-sm text-ink-500 leading-relaxed">{s.body}</p>
+        <h2 className="section-title">{c.stepsTitle}</h2>
+        <ol className="plain-steps">
+          {c.steps.map((s) => (
+            <li key={s.title}>
+              <strong>{s.title}</strong>
+              <p>{s.body}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="max-w-3xl">
-        <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink-900 mb-6">
-          {c.faqTitle}
-        </h2>
-        <div className="space-y-3">
-          {c.faqs.map((f) => (
-            <details key={f.q} className="glass rounded-2xl px-5 py-4 group">
-              <summary className="cursor-pointer font-medium text-ink-900">{f.q}</summary>
-              <p className="mt-2 text-sm text-ink-500 leading-relaxed">{f.a}</p>
-            </details>
-          ))}
-        </div>
+      <section className="faq">
+        <h2 className="section-title">{c.faqTitle}</h2>
+        {c.faqs.map((f) => (
+          <div key={f.q}>
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
       </section>
 
-      <section className="glass-strong rounded-3xl px-6 sm:px-10 py-10 sm:py-12 text-center">
-        <h2 className="font-display text-3xl sm:text-4xl font-medium tracking-tight text-ink-900 mb-3">
-          {c.ctaTitle}
-        </h2>
-        <p className="text-ink-500 mb-6">{c.ctaBody}</p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <a href={EMAIL_HREF} className="btn-primary">{EMAIL_LABEL}</a>
-          <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn-ghost">{c.bookCall}</a>
+      <section>
+        <h2 className="section-title">{c.ctaTitle}</h2>
+        <p className="dek">{c.ctaBody}</p>
+        <div className="offer-actions">
+          <a href={EMAIL_HREF} className="btn btn-primary">{EMAIL_LABEL}</a>
+          <a href={BOOK_LINK} target="_blank" rel="noreferrer" className="btn btn-ghost">
+            {c.bookCall}
+          </a>
         </div>
       </section>
     </div>

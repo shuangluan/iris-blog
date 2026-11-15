@@ -13,18 +13,46 @@ export function isLang(v: unknown): v is Lang {
   return v === "en" || v === "zh";
 }
 
+export function calendarParts(iso: string) {
+  const m = String(iso).match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return { year: Number(m[1]), month: Number(m[2]), day: Number(m[3]) };
+  const d = new Date(iso);
+  return { year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate() };
+}
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS_LONG = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+export function dayNum(iso: string) {
+  return String(calendarParts(iso).day).padStart(2, "0");
+}
+
+export function monthYear(iso: string, lang: Lang) {
+  const { year, month } = calendarParts(iso);
+  if (lang === "zh") return `${year}年${month}月`;
+  return `${MONTHS[month - 1]} ${year}`;
+}
+
+/** Featured kicker date: "Oct 20, 2026" / "2026年10月20日". */
+export function kickerDate(iso: string, lang: Lang) {
+  const { year, month, day } = calendarParts(iso);
+  if (lang === "zh") return `${year}年${month}月${day}日`;
+  return `${MONTHS[month - 1]} ${day}, ${year}`;
+}
+
 export function formatDate(
   iso: string,
   lang: Lang,
   style: "short" | "long" | "compact" = "short"
 ) {
-  const d = new Date(iso);
-  const locale = lang === "zh" ? "zh-CN" : "en-US";
-  if (style === "long")
-    return d.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" });
-  if (style === "compact")
-    return d.toLocaleDateString(locale, { year: "2-digit", month: "short", day: "numeric" });
-  return d.toLocaleDateString(locale, { year: "numeric", month: "short", day: "numeric" });
+  const { year, month, day } = calendarParts(iso);
+  if (lang === "zh") return `${year}年${month}月${day}日`;
+  if (style === "long") return `${MONTHS_LONG[month - 1]} ${day}, ${year}`;
+  if (style === "compact") return `${MONTHS[month - 1]} ${day}, ${String(year).slice(2)}`;
+  return `${MONTHS[month - 1]} ${day}, ${year}`;
 }
 
 export function readingLabel(minutes: number, lang: Lang) {
@@ -33,7 +61,14 @@ export function readingLabel(minutes: number, lang: Lang) {
 }
 
 const en = {
-  nav: { home: "Home", writing: "Writing", tags: "Tags", services: "Services", about: "About" },
+  nav: {
+    home: "Home",
+    writing: "Writing",
+    projects: "Projects",
+    services: "Services",
+    about: "About",
+    menu: "Menu"
+  },
   toggle: { label: "中文", aria: "切换到中文" },
   categories: {
     notes: "Notes",
@@ -65,7 +100,35 @@ const en = {
     nlChip: "Newsletter",
     nlTitleA: "New posts, straight to",
     nlTitleB: "your inbox.",
-    nlBody: "One email when I publish. No threads, no \"10 things\", no spam."
+    nlBody: "One email when I publish. No threads, no \"10 things\", no spam.",
+    tagline: "Small notes from a life between two coasts.",
+    since: "Writing since 2026 · Shanghai ⇄ NY",
+    writingLabel: "Writing",
+    allWriting: "All writing →",
+    projectsLabel: "Current projects",
+    allProjects: "All projects →",
+    servicesTitle: "Turn AI ideas into things engineers can build.",
+    servicesCta: "From $50 · See services →",
+    servicesAria: "Services",
+    nlTitle: "New posts, straight to your inbox."
+  },
+  writing: {
+    title: "Writing",
+    all: "All",
+    empty: "No posts with this tag yet.",
+    count: (n: number) => (n === 1 ? "1 post" : `${n} posts`)
+  },
+  projectsPage: {
+    title: "Projects",
+    current: "Current",
+    past: "Past",
+    role: "Role",
+    period: "Period",
+    related: "Related",
+    todoLine: "[One-line TBD]",
+    todoName: "[Name TBD]",
+    todoRole: "[Role TBD]",
+    todoStatus: "[Status TBD]"
   },
   card: { latest: "Latest" },
   posts: {
@@ -105,6 +168,7 @@ const en = {
     cta: "Buy me a coffee →"
   },
   newsletter: {
+    label: "Email",
     placeholder: "you@somewhere.com",
     subscribe: "Subscribe",
     loading: "Subscribing…",
@@ -135,7 +199,14 @@ const en = {
 export type Dict = typeof en;
 
 const zh: Dict = {
-  nav: { home: "首页", writing: "文章", tags: "标签", services: "服务", about: "关于" },
+  nav: {
+    home: "首页",
+    writing: "文章",
+    projects: "项目",
+    services: "服务",
+    about: "关于",
+    menu: "菜单"
+  },
   toggle: { label: "EN", aria: "Switch to English" },
   categories: {
     notes: "随笔",
@@ -167,7 +238,35 @@ const zh: Dict = {
     nlChip: "邮件订阅",
     nlTitleA: "新文章，",
     nlTitleB: "直接到你的邮箱。",
-    nlBody: "我发新文章时发一封邮件。没有长串推送，没有标题党，没有垃圾邮件。"
+    nlBody: "我发新文章时发一封邮件。没有长串推送，没有标题党，没有垃圾邮件。",
+    tagline: "在两座海岸城市之间，写下生活的小笔记。",
+    since: "2026 年开始写 · 上海 ⇄ 纽约",
+    writingLabel: "文章",
+    allWriting: "全部文章 →",
+    projectsLabel: "在做的项目",
+    allProjects: "全部项目 →",
+    servicesTitle: "把 AI 想法，变成工程师能直接开干的东西。",
+    servicesCta: "从 $50 起 · 查看服务 →",
+    servicesAria: "服务",
+    nlTitle: "新文章，直接到你的邮箱。"
+  },
+  writing: {
+    title: "文章",
+    all: "全部",
+    empty: "这个标签下还没有文章。",
+    count: (n: number) => `${n} 篇`
+  },
+  projectsPage: {
+    title: "项目",
+    current: "当前",
+    past: "过往",
+    role: "角色",
+    period: "时间",
+    related: "相关",
+    todoLine: "[简介待填]",
+    todoName: "[项目名待填]",
+    todoRole: "[角色待填]",
+    todoStatus: "[状态待填]"
   },
   card: { latest: "最新" },
   posts: {
@@ -207,7 +306,8 @@ const zh: Dict = {
     cta: "请我喝杯咖啡 →"
   },
   newsletter: {
-    placeholder: "你的邮箱",
+    label: "你的邮箱",
+    placeholder: "you@somewhere.com",
     subscribe: "订阅",
     loading: "订阅中…",
     already: "你已经订阅过了。",

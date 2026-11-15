@@ -156,6 +156,47 @@ export function getPostsByCategory(cat: Category, lang?: Lang): PostMeta[] {
   return getAllPosts(lang).filter((p) => p.category === cat);
 }
 
+const CATEGORY_ORDER: Category[] = [
+  "notes",
+  "case-study",
+  "travel",
+  "side-project",
+  "life"
+];
+
+export function getWritingFilters(
+  lang?: Lang
+): { tag: string; count: number; kind: "category" | "topic" }[] {
+  const posts = getAllPosts(lang);
+  const categories = CATEGORY_ORDER.map((tag) => ({
+    tag,
+    kind: "category" as const,
+    count: posts.filter((p) => p.category === tag).length
+  })).filter((c) => c.count > 0);
+  const topics = getAllTags(lang)
+    .filter((item) => !(CATEGORY_ORDER as string[]).includes(item.tag) && item.count > 0)
+    .map((item) => ({ ...item, kind: "topic" as const }));
+  return [...categories, ...topics];
+}
+
+export function filterPosts(posts: PostMeta[], tag?: string): PostMeta[] {
+  if (!tag) return posts;
+  return posts.filter((p) => p.category === tag || p.tags.includes(tag));
+}
+
+/**
+ * Posts that name a project. Matches an exact tag, or "Verbatim" in the title.
+ * Does not search bodies, so the English adverb "verbatim" is not a hit.
+ */
+export function getRelatedPosts(lang: Lang | undefined, needle: string): PostMeta[] {
+  const n = needle.toLowerCase();
+  return getAllPosts(lang).filter((p) => {
+    if (p.tags.some((tag) => tag.toLowerCase() === n)) return true;
+    if (n === "verbatim") return p.title.includes("Verbatim");
+    return p.title.toLowerCase().includes(n);
+  });
+}
+
 // Kept for anything that still imports them (e.g. RSS). UI uses lib/i18n.
 export const CATEGORY_LABELS: Record<Category, string> = DICTS.en.categories;
 export const CATEGORY_BLURBS: Record<Category, string> = DICTS.en.blurbs;
