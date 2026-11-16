@@ -16,9 +16,10 @@ Iris Luan is an independent AI product consultant and former lead product manage
 
 ## Pages
 
-- [About](${SITE_URL}/about): background, projects, and contact
+- [About](${SITE_URL}/about): background and contact
+- [Projects](${SITE_URL}/projects): ZEAI, Verbatim, OneLink, and this site
 - [Services](${SITE_URL}/services): AI product consulting tiers and prices
-- [All writing](${SITE_URL}/posts)
+- [All writing](${SITE_URL}/writing)
 
 ## Case studies
 

@@ -63,6 +63,7 @@ const copy = {
     },
     elsewhere: "Elsewhere",
     start: "Start reading →",
+    madeLink: "See projects →",
     period: "."
   },
   zh: {
@@ -93,6 +94,7 @@ const copy = {
     },
     elsewhere: "其他地方",
     start: "开始阅读 →",
+    madeLink: "查看项目 →",
     period: "。"
   }
 };
@@ -100,94 +102,52 @@ const copy = {
 export default function AboutPage() {
   const c = copy[getLang()];
 
-  const projects: { name: string; desc: string; url?: string }[] = [
-    { name: "OneLink", desc: c.projects.onelink },
-    { name: "Verbatim", desc: c.projects.verbatim, url: "https://byverbatim.com" },
-    { name: "irisluan.com", desc: c.projects.site, url: "/" }
-  ];
-
   return (
-    <div className="max-w-2xl mx-auto space-y-14">
+    <div className="column page-stack">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      <header>
-        <span className="chip mb-5">{c.chip}</span>
-        <h1 className="font-display text-5xl sm:text-6xl font-medium tracking-tight text-ink-900 leading-[1.02]">
-          {c.hi} <span className="gradient-text italic">Iris.</span>
-        </h1>
-        <p className="mt-5 text-lg italic text-ink-500">{c.motto}</p>
+      <header className="page-head">
+        <p className="eyebrow">{c.chip}</p>
+        <h1 className="page-title">{c.hi} Iris.</h1>
+        <p className="motto">{c.motto}</p>
       </header>
 
-      <section className="prose-soft">
+      <section className="prose">
         {c.bio.map((para) => (
-          <p key={para.slice(0, 20)}>{para}</p>
+          <p key={para.slice(0, 24)}>{para}</p>
         ))}
         <p>
           {c.reachA}{" "}
           <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
-          <Link href="/services">{c.servicesLink}</Link>{c.period}
+          <Link href="/services">{c.servicesLink}</Link>
+          {c.period}
         </p>
       </section>
 
       <section>
-        <h2 className="font-display text-2xl font-medium tracking-tight text-ink-900 mb-5">
-          {c.currently}
-        </h2>
-        <ul className="glass rounded-2xl divide-y divide-lilac-200/30">
+        <h2 className="section-title">{c.currently}</h2>
+        <dl className="now-list">
           {c.now.map(([e, k, v]) => (
-            <li key={k} className="flex items-center gap-3 px-5 py-3">
-              <span aria-hidden>{e}</span>
-              <span className="text-xs uppercase tracking-widest text-lilac-600 w-24">
+            <div key={k}>
+              <dt>
+                <span aria-hidden>{e} </span>
                 {k}
-              </span>
-              <span className="text-ink-700 text-sm">{v}</span>
-            </li>
+              </dt>
+              <dd>{v}</dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       </section>
 
       <section>
-        <h2 className="font-display text-2xl font-medium tracking-tight text-ink-900 mb-5">
-          {c.made}
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {projects.map((p) => {
-            const content = (
-              <>
-                <div className="font-medium text-ink-900 flex items-center gap-1.5">
-                  {p.name}
-                  {p.url && <span className="text-ink-300 group-hover:text-ink-500">↗</span>}
-                </div>
-                <div className="text-sm text-ink-500 mt-0.5">{p.desc}</div>
-              </>
-            );
-            if (!p.url) {
-              return (
-                <div key={p.name} className="glass rounded-2xl p-5">
-                  {content}
-                </div>
-              );
-            }
-            const external = p.url.startsWith("http");
-            return (
-              <a
-                key={p.name}
-                href={p.url}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noreferrer" : undefined}
-                className="no-underline block glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-softLg transition-all"
-              >
-                {content}
-              </a>
-            );
-          })}
-        </div>
+        <h2 className="section-title">{c.made}</h2>
+        <p>
+          <Link href="/projects">{c.madeLink}</Link>
+        </p>
       </section>
 
       <section>
-        <h2 className="font-display text-2xl font-medium tracking-tight text-ink-900 mb-5">
-          {c.elsewhere}
-        </h2>
-        <div className="flex flex-wrap gap-2">
+        <h2 className="section-title">{c.elsewhere}</h2>
+        <div className="link-row">
           {[
             { label: "X @iris_ls_luan", url: "https://x.com/iris_ls_luan" },
             { label: "小红书 Iris", url: "https://xhslink.cn/o/90fVn574k1y" },
@@ -195,16 +155,16 @@ export default function AboutPage() {
             { label: "GitHub", url: "https://github.com/shuangluan" },
             { label: "Email", url: "mailto:luanshuang.ls@gmail.com" }
           ].map((l) => (
-            <a key={l.label} href={l.url} className="chip">
-              {l.label} ↗
+            <a key={l.label} href={l.url}>
+              {l.label}
             </a>
           ))}
         </div>
       </section>
 
-      <section className="glass-strong rounded-3xl px-6 sm:px-10 py-10 text-center">
-        <Link href="/posts" className="btn-primary">{c.start}</Link>
-      </section>
+      <p>
+        <Link href="/writing">{c.start}</Link>
+      </p>
     </div>
   );
 }

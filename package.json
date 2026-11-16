@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/subset-cjk.mjs",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "subset-cjk": "node scripts/subset-cjk.mjs"
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
