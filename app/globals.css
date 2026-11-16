@@ -1202,7 +1202,10 @@ nav,
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
-  margin-top: 1.25rem;
+}
+
+.about-hero .prose {
+  max-width: none;
 }
 
 .about-hero .prose > :first-child {
@@ -1237,21 +1240,24 @@ nav,
 @media (min-width: 1024px) {
   .about-hero {
     display: grid;
-    grid-template-columns: 8fr 3fr 1fr;
+    grid-template-columns: minmax(0, 1fr) 200px;
     column-gap: 48px;
     align-items: start;
-    margin-top: 0;
   }
 
   .about-photo,
   .about-portrait {
-    width: 100%;
+    width: 200px;
     max-width: 200px;
+  }
+
+  .about-portrait {
+    height: 250px;
   }
 }
 
 .motto {
-  margin: 0.85rem 0 0;
+  margin: 0 0 20px;
   color: var(--muted);
   font-size: var(--step-1);
   line-height: 1.5;

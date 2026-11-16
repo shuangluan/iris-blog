@@ -115,8 +115,9 @@ export default function AboutPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       <div>
         <PageHeader title={`${c.hi} Iris.`} />
-        <p className="motto">{c.motto}</p>
         <div className="about-hero">
+            <div className="about-copy">
+            <p className="motto">{c.motto}</p>
             <section className="prose">
               {c.bio.map((para) => (
                 <p key={para.slice(0, 24)}>{para}</p>
@@ -132,9 +133,10 @@ export default function AboutPage() {
                 {c.reachA}{" "}
                 <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
                 <Link href="/services">{c.servicesLink}</Link>
-                {c.period}
-              </p>
-            </section>
+              {c.period}
+            </p>
+          </section>
+            </div>
             <figure className="about-photo">
               <Image
                 src="/images/iris-portrait.jpg"
