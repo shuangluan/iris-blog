@@ -27,8 +27,8 @@ export const PROJECTS: Project[] = [
     name: { en: "ZEAI", zh: "ZEAI" },
     status: "current",
     oneLine: {
-      en: "Affiliate-ops autopilot for US TikTok Shop brands doing $1M–$20M GMV.",
-      zh: "给美国 GMV 100 万到 2000 万美元的 TikTok Shop 品牌做的达人运营自动化工具。"
+      en: "Building open-source tools for AI content moderation: confidence calibration and cost-aware review routing.",
+      zh: "为 AI 内容审核做开源工具：校准模型置信度，按成本分流人工复核。"
     },
     role: { en: "Founder · solo builder", zh: "创始人 · 独立开发" },
     period: { en: "2026 –", zh: "2026 –" },
