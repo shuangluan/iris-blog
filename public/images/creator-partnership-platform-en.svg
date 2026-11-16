@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1580" width="1600" height="1580" font-family="Inter, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif">
+<defs><marker id="af08a4b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a4b"/></marker><marker id="a5b6cf0" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6cf0"/></marker><marker id="a8b5cf6" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6"/></marker><marker id="a2f9e6e" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f9e6e"/></marker></defs>
+<rect width="1600" height="1580" fill="#fcfbff"/>
+<rect x="30" y="30" width="1540" height="230" rx="24" fill="#fff4ec" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="60" y="72" font-size="22" font-weight="700" fill="#f08a4b" text-anchor="start">1 · The trigger: why we had to build fast</text>
+<rect x="60" y="95" width="330" height="145" rx="16" fill="#fff" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="85" y="140" font-size="22" font-weight="700" fill="#1f1b2e" text-anchor="start">11 partner agencies</text>
+<text x="85" y="172" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Supplying premium content</text>
+<text x="85" y="194" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">to the community app</text>
+<line x1="400" y1="167" x2="450" y2="167" stroke="#f08a4b" stroke-width="2.5" marker-end="url(#af08a4b)"/>
+<rect x="460" y="95" width="430" height="145" rx="16" fill="#fff" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="485" y="135" font-size="20" font-weight="700" fill="#d9452b" text-anchor="start">Competitive threat</text>
+<text x="485" y="166" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Agencies offered a third-party tool</text>
+<text x="485" y="188" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Losing control of the content</text>
+<text x="485" y="210" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">supply chain and quality</text>
+<line x1="900" y1="167" x2="950" y2="167" stroke="#f08a4b" stroke-width="2.5" marker-end="url(#af08a4b)"/>
+<rect x="960" y="95" width="580" height="145" rx="16" fill="#fff" stroke="#2f9e6e" stroke-width="2"/>
+<text x="985" y="132" font-size="15" font-weight="700" fill="#2f9e6e" text-anchor="start">Decision · with ops lead + leadership</text>
+<text x="985" y="170" font-size="24" font-weight="700" fill="#1f1b2e" text-anchor="start">Build our own platform</text>
+<text x="985" y="202" font-size="18" font-weight="600" fill="#1f1b2e" text-anchor="start">0 to 1 in a 2-month sprint</text>
+<text x="985" y="228" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Own the pipeline · Keep agency trust · Protect content quality</text>
+<rect x="30" y="280" width="960" height="600" rx="24" fill="#eef0ff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="60" y="322" font-size="22" font-weight="700" fill="#5b6cf0" text-anchor="start">2 · Platform architecture: 4 layers</text>
+<rect x="60" y="350" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="392" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Agencies</text>
+<text x="80" y="424" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Manage creators,</text>
+<text x="80" y="446" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">tasks, performance</text>
+<line x1="282" y1="420" x2="330" y2="545" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="60" y="520" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="562" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Creators</text>
+<text x="80" y="594" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Tasks, drafts,</text>
+<text x="80" y="616" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">review status</text>
+<line x1="282" y1="590" x2="330" y2="575" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="60" y="690" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="732" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Platform ops</text>
+<text x="80" y="764" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Review, manage,</text>
+<text x="80" y="786" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">monitor supply</text>
+<line x1="282" y1="760" x2="330" y2="605" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="335" y="520" width="110" height="110" rx="16" fill="#fff" stroke="#5b6cf0" stroke-width="2"/>
+<text x="390" y="568" font-size="15" font-weight="400" fill="#5b6cf0" text-anchor="middle">Sign in</text>
+<text x="390" y="590" font-size="15" font-weight="400" fill="#5b6cf0" text-anchor="middle">by role</text>
+<line x1="447" y1="575" x2="485" y2="575" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="490" y="345" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="381" r="16" fill="#5b6cf0"/>
+<text x="522" y="387" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="550" y="388" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Binding &amp; permissions</text>
+<text x="520" y="420" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Agency owner → member → creator → ops</text>
+<text x="520" y="442" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Agency-creator binding with audit trail</text>
+<rect x="490" y="475" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="511" r="16" fill="#5b6cf0"/>
+<text x="522" y="517" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="550" y="518" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Content workflow</text>
+<text x="520" y="550" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Task brief → draft → review → cleared</text>
+<text x="520" y="572" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Image-and-text first, video in V2</text>
+<rect x="490" y="605" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="641" r="16" fill="#5b6cf0"/>
+<text x="522" y="647" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="550" y="648" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Partnership management</text>
+<text x="520" y="680" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Lifecycle tracking, creator assignment</text>
+<text x="520" y="702" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Deliverable management</text>
+<rect x="490" y="735" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="771" r="16" fill="#5b6cf0"/>
+<text x="522" y="777" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="550" y="778" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Analytics</text>
+<text x="520" y="810" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Agency view + ops view</text>
+<text x="520" y="832" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Same data on both sides = trust</text>
+<rect x="1010" y="280" width="560" height="600" rx="24" fill="#ecf8f2" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1040" y="322" font-size="22" font-weight="700" fill="#2f9e6e" text-anchor="start">3 · Team &amp; stakeholders</text>
+<circle cx="1150" cy="560" r="120" fill="#2f9e6e" fill-opacity="0.18"/>
+<circle cx="1150" cy="560" r="85" fill="#2f9e6e" fill-opacity="0.3"/>
+<circle cx="1150" cy="560" r="50" fill="#2f9e6e" fill-opacity="1"/>
+<text x="1150" y="558" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">Me</text>
+<text x="1150" y="582" font-size="13" font-weight="500" fill="#fff" text-anchor="middle">Lead PM</text>
+<rect x="1290" y="350" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="386" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">Engineering · daily</text>
+<text x="1310" y="418" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">~20 engineers, 4 sub-teams</text>
+<text x="1310" y="442" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Server + frontend leads</text>
+<text x="1310" y="466" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">QA</text>
+<line x1="1185.0" y1="525" x2="1288" y2="426" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="1290" y="522" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="558" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">Product partners</text>
+<text x="1310" y="590" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Shared design team</text>
+<text x="1310" y="614" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Ops lead (scoping partner)</text>
+<text x="1310" y="638" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Leadership (sponsor)</text>
+<line x1="1209.5" y1="560" x2="1288" y2="598" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="1290" y="694" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="730" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">External</text>
+<text x="1310" y="762" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">11 agencies (user research)</text>
+<text x="1310" y="786" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Regional ops teams</text>
+<text x="1310" y="810" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">Legal &amp; compliance</text>
+<line x1="1234.0" y1="620" x2="1288" y2="770" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="30" y="900" width="1540" height="300" rx="24" fill="#f4efff" stroke="#d8c8fb" stroke-width="1.5"/>
+<text x="60" y="942" font-size="22" font-weight="700" fill="#8b5cf6" text-anchor="start">4 · MVP scoping: 4 steps that made 8 weeks possible</text>
+<rect x="60" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="96" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="96" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="126" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Write the full PRD</text>
+<text x="90" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Sole author</text>
+<text x="90" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Deliberately over-scoped</text>
+<text x="90" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Tradeoffs become visible</text>
+<line x1="403" y1="1070" x2="436" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="440" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="476" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="476" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="506" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">3-day tech assessment</text>
+<text x="470" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Server + frontend leads</text>
+<text x="470" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Effort + risk per item</text>
+<text x="470" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">No meetings</text>
+<line x1="783" y1="1070" x2="816" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="820" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="856" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="856" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="886" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Business-risk MVP call</text>
+<text x="850" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Effort × risk of not shipping</text>
+<text x="850" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Low effort, high risk: keep</text>
+<text x="850" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">High effort, low risk: cut</text>
+<line x1="1163" y1="1070" x2="1196" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="1200" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="1236" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="1236" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="1266" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">Weekly de-scoping</text>
+<text x="1230" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">30 min with eng leads</text>
+<text x="1230" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Can we still ship on time?</text>
+<text x="1230" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">Add one, remove one</text>
+<rect x="30" y="1220" width="1540" height="330" rx="24" fill="#1f1b2e" stroke="#1f1b2e" stroke-width="1.5"/>
+<text x="60" y="1262" font-size="22" font-weight="700" fill="#fff" text-anchor="start">5 · Impact</text>
+<rect x="60" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="85" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">8 weeks</text>
+<text x="85" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">0 to 1, vs. the usual</text>
+<text x="85" y="1381" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">6 to 9 months</text>
+<rect x="565" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="590" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">11 / 11</text>
+<text x="590" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">Partner agencies retained</text>
+<text x="590" y="1381" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">None moved to the tool</text>
+<rect x="1070" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="1095" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">Weeks → days</text>
+<text x="1095" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">Creator onboarding</text>
+<rect x="60" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="85" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">Email → hours</text>
+<text x="85" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">Draft review in platform</text>
+<rect x="565" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="590" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">Coordination → strategy</text>
+<text x="590" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">Ops team focus</text>
+<rect x="1070" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="1095" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">Foundation</text>
+<text x="1095" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">For later monetization</text>
+<text x="1095" y="1509" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">features</text>
+</svg>

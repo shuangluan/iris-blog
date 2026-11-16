@@ -1,0 +1,125 @@
+---
+title: "Creator Partnership Platform: 0 to 1 in 8 weeks, with all 11 partner agencies retained"
+description: "An efficiency and collaboration platform connecting creators, MCN agencies, and platform ops. Projects like this usually take 6 to 9 months. We took 8 weeks."
+date: 2026-11-15
+category: case-study
+tags: ["platform-0-to-1", "mvp-scoping", "creator-economy", "B2B", "PRD"]
+lang: en
+translationKey: creator-partnership-platform
+draft: true
+---
+
+An efficiency and collaboration platform serving three parties: creators, MCN agencies, and the platform's internal ops team.
+
+| My contribution | Team | Status |
+|---|---|---|
+| Product strategy · Full PRD (sole author) · MVP scoping decisions · Agency user research | ~20 engineers across 4 sub-teams · Shared design team · QA | Shipped in 8 weeks; all 11 partner agencies retained |
+
+![Creator partnership platform overview: trigger, 4-layer architecture, team, MVP method, and impact](/images/creator-partnership-platform-en.svg)
+
+## Summary
+
+The platform pulled a partnership workflow that used to live in forms, spreadsheets, and email into one place. Each of the three user groups has its own entry point:
+
+- **Agencies** manage their creators, partnership tasks, and performance
+- **Creators** receive tasks, submit drafts, and track review status
+- **Platform ops** review drafts, manage partnerships, and monitor content supply
+
+The platform has four layers:
+
+1. **Binding and permissions:** multi-tier permissions for agency owners, agency members, creators, and platform ops, plus agency-creator binding with an audit trail
+2. **Content workflow:** from task brief to draft submission, review, and clearance to publish
+3. **Partnership management:** lifecycle tracking, creator assignment, and deliverable management
+4. **Analytics:** agencies see their own creators' performance, ops sees overall content supply. Both sides see the same data, which is the basis of trust
+
+## Background
+
+The platform served an international lifestyle content community app. Its core value was a high-quality content pool: people opened the app because the content was genuinely useful.
+
+By 2023, a large share of that premium content came from 11 partner MCN agencies around the world. Their creators produced content to the platform's topic and quality standards, reviewed by ops.
+
+The partnership worked, but the process was held together by hand:
+
+- To onboard a new creator, an agency filled out an online form, ops approved it manually, someone updated a spreadsheet, and a separate process bound the creator to the agency
+- Draft review happened over email
+- Data came from exported spreadsheets; when ops wanted to see how a partnership was performing, they asked an engineer to write a query
+
+Then the ops lead brought a warning: several partner agencies had received a quote from a third-party SaaS tool that would run the entire agency, creator, and brand workflow. If agencies moved to it, the platform would lose control of this content supply chain, and with it, content quality and differentiation.
+
+After discussing it with leadership, we decided to build our own, and to build it fast.
+
+## Problem
+
+**Platforms like this usually take 6 to 9 months. We had 2. How do you build something agencies won't want to leave, in a third of the time?**
+
+The real challenge wasn't the architecture. It was making tradeoffs under time pressure: every requirement had someone asking for it, but only some of them would cause real damage if left out.
+
+## What I owned
+
+**I owned:** product strategy and roadmap; the full PRD (sole author); every MVP scoping decision; day-to-day coordination with ~20 engineers; user research with all 11 agencies; the final call in each week's de-scoping.
+
+**I partnered with:** the US ops lead (my partner on business-side scoping), the shared design team, regional ops teams (localization and training), and legal and compliance (audit and regional requirements).
+
+## Scope down
+
+The PRD covered the full vision: everything agencies and ops had asked for. Here are some representative tradeoffs:
+
+| Requirement | Decision | Why |
+|---|---|---|
+| Creators publish approved drafts to the app directly from the platform | **Cut.** Built a mobile-friendly web page instead; creators copy and publish in the app | Required a web publisher matching the app's features and data, plus two-way sync. Huge engineering effort, and no publishing API was available. The benefit was saving one copy step |
+| Ops reviews video drafts | **Moved to V2** | Required solving video playback and post-review editing first. The goal was expanding the content pool, which image-and-text posts already achieved, and there was no evidence they were less valuable than video |
+| Cross-agency analytics dashboard with export | **Cut** | Agencies wanted it, but no agency would leave without it; existing spreadsheets could carry the load for another quarter |
+| Agencies see their creators' contract status | **Kept** | Small effort. Without it, agencies would feel blind, which was exactly the third-party tool's pitch |
+| API for agencies to connect their own systems | **Cut** (in hindsight, a minimal read-only version should have shipped) | Smaller agencies were fine with the UI, but the two largest had to double-enter data. See Reflection |
+
+## Key decisions
+
+### 01 · No web publisher; solve it with a mobile web page
+
+**What users asked for:** Creators wanted to publish approved drafts to the app in one click from the platform. Before, they waited for approval, then copied the text onto their phone to publish.
+
+**What we shipped:** No web publisher. Instead, the platform was built as a mobile-friendly web page. Creators open it on their phone, copy the approved content, and publish it in the app.
+
+**Why:** A web publisher meant rebuilding the app's publishing features and data structure on the web, then connecting both sides so posts published on the web synced to the app automatically. The app had no mature publishing API we could use. All that engineering would only save one copy step. And creators already published from their phones; they didn't need a computer and phone working together. A mobile web page solved the real pain.
+
+### 02 · Image-and-text review only in the MVP; video in V2
+
+**What users asked for:** The app supports both image-and-text posts and videos, so creators might submit either, and ops wanted to review both in the platform.
+
+**What we shipped:** The MVP supported review of image-and-text drafts only. Video review moved to V2.
+
+**Why:** Reviewing video meant solving a video player, post-review editing, and related problems in the MVP. The core goal of this partnership was expanding the content pool, and image-and-text content already achieved that. There was no evidence it was less useful or valuable than video. Getting the workflow running with one format was faster than building for two.
+
+### 03 · Scope by "business risk of not shipping," not "do users want it"
+
+**The usual approach:** List the must-haves and defer everything else. The problem is that you don't know what's a must-have until you've seen all the tradeoffs.
+
+**What we did:** Four steps.
+
+1. **Write the full PRD, deliberately over-scoped.** With every requirement on the table, the conversation shifts from "what should we add" to "what should we cut." A single author avoids the delays and vague requirements of committee writing.
+2. **A 3-day tech assessment.** The server and frontend leads gave an effort estimate and risk flag for every requirement, without meetings.
+3. **Make the MVP call on two axes.** One was engineering effort. The other was the business risk of not shipping it. I asked agencies directly: "If v1 doesn't have this, will you leave?" High effort and low risk got cut; low effort and high risk stayed; the gray zone was my call.
+4. **De-scope every week.** A 30-minute meeting with the engineering leads each week, with one agenda item: can we still ship the current scope on time? Any new requirement had to replace one of equal size.
+
+**Why:** Agencies wanted everything, so "do they want it" couldn't decide anything. The real question was: if we don't build this, will agencies move to the third-party tool?
+
+## Results
+
+| Area | Result |
+|---|---|
+| Delivery | 0 to 1 in 8 weeks, versus the usual 6 to 9 months |
+| Partnerships | All 11 partner agencies retained; none moved to the third-party tool |
+| Operations | Creator onboarding from weeks to days; draft review from email chains to hours in the platform; ops shifted from coordination to strategy |
+
+Just as important, agencies kept supplying ops-reviewed premium content to the content pool, and the platform became the foundation for later monetization features.
+
+## Reflection
+
+**Two things I'd do differently:**
+
+- **Ask for 2 more weeks.** We shipped on time in 8 weeks, but testing was thin. A permissions edge case surfaced in the first week of production that two more weeks of QA would have caught. It wasn't severe, but it dented the trust of the first agency on the platform, and it took me a month to rebuild.
+- **Ship a minimal read-only API in v1.** Our two largest agencies had their own CRMs, finance tools, and creator databases. With only a UI in v1, they either double-entered data or waited for V2. Both later said this was the biggest friction in the transition.
+
+Both came from the same root cause: focusing only on the deadline made it easy to overlook what matters after launch. Next time I'd deliberately reserve 15 to 20 percent of scope for those needs.
+
+**One principle: separate what users want from the business risk of not shipping.** Users always want everything, and that won't tell you what to build. The question to ask is: what happens to the business if we don't build this? If nothing happens, defer it. If it leads to churn, competitive loss, or broken trust, it's core.

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1580" width="1600" height="1580" font-family="'PingFang SC','Hiragino Sans GB','Noto Sans SC','Noto Sans CJK SC','Microsoft YaHei', system-ui, sans-serif">
+<defs><marker id="af08a4b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f08a4b"/></marker><marker id="a5b6cf0" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6cf0"/></marker><marker id="a8b5cf6" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8b5cf6"/></marker><marker id="a2f9e6e" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f9e6e"/></marker></defs>
+<rect width="1600" height="1580" fill="#fcfbff"/>
+<rect x="30" y="30" width="1540" height="230" rx="24" fill="#fff4ec" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="60" y="72" font-size="22" font-weight="700" fill="#f08a4b" text-anchor="start">1 · 背景：为什么必须快</text>
+<rect x="60" y="95" width="330" height="145" rx="16" fill="#fff" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="85" y="140" font-size="22" font-weight="700" fill="#1f1b2e" text-anchor="start">11 家合作机构</text>
+<text x="85" y="172" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">为内容社区 App</text>
+<text x="85" y="194" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">供给优质内容</text>
+<line x1="400" y1="167" x2="450" y2="167" stroke="#f08a4b" stroke-width="2.5" marker-end="url(#af08a4b)"/>
+<rect x="460" y="95" width="430" height="145" rx="16" fill="#fff" stroke="#f6c9a8" stroke-width="1.5"/>
+<text x="485" y="135" font-size="20" font-weight="700" fill="#d9452b" text-anchor="start">竞争威胁</text>
+<text x="485" y="166" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">机构收到第三方工具报价</text>
+<text x="485" y="188" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">可能失去对内容供给链</text>
+<text x="485" y="210" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">和内容质量的掌控</text>
+<line x1="900" y1="167" x2="950" y2="167" stroke="#f08a4b" stroke-width="2.5" marker-end="url(#af08a4b)"/>
+<rect x="960" y="95" width="580" height="145" rx="16" fill="#fff" stroke="#2f9e6e" stroke-width="2"/>
+<text x="985" y="132" font-size="15" font-weight="700" fill="#2f9e6e" text-anchor="start">决策 · 与运营负责人和管理层</text>
+<text x="985" y="170" font-size="24" font-weight="700" fill="#1f1b2e" text-anchor="start">自建协作平台</text>
+<text x="985" y="202" font-size="18" font-weight="600" fill="#1f1b2e" text-anchor="start">2 个月从 0 到 1</text>
+<text x="985" y="228" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">掌控供给链 · 保住机构信任 · 守住内容质量</text>
+<rect x="30" y="280" width="960" height="600" rx="24" fill="#eef0ff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="60" y="322" font-size="22" font-weight="700" fill="#5b6cf0" text-anchor="start">2 · 平台架构：四层结构</text>
+<rect x="60" y="350" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="392" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">机构</text>
+<text x="80" y="424" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">管理创作者、</text>
+<text x="80" y="446" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">任务和数据</text>
+<line x1="282" y1="420" x2="330" y2="545" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="60" y="520" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="562" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">创作者</text>
+<text x="80" y="594" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">接任务、交稿、</text>
+<text x="80" y="616" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">看审核进度</text>
+<line x1="282" y1="590" x2="330" y2="575" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="60" y="690" width="220" height="140" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<text x="80" y="732" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">平台运营</text>
+<text x="80" y="764" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">审核、管理、</text>
+<text x="80" y="786" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">监控内容供给</text>
+<line x1="282" y1="760" x2="330" y2="605" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="335" y="520" width="110" height="110" rx="16" fill="#fff" stroke="#5b6cf0" stroke-width="2"/>
+<text x="390" y="568" font-size="15" font-weight="400" fill="#5b6cf0" text-anchor="middle">按角色</text>
+<text x="390" y="590" font-size="15" font-weight="400" fill="#5b6cf0" text-anchor="middle">登录</text>
+<line x1="447" y1="575" x2="485" y2="575" stroke="#5b6cf0" stroke-width="2.5" marker-end="url(#a5b6cf0)"/>
+<rect x="490" y="345" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="381" r="16" fill="#5b6cf0"/>
+<text x="522" y="387" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="550" y="388" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">绑定与权限层</text>
+<text x="520" y="420" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">机构负责人 → 成员 → 创作者 → 运营</text>
+<text x="520" y="442" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">机构与创作者绑定，带审计记录</text>
+<rect x="490" y="475" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="511" r="16" fill="#5b6cf0"/>
+<text x="522" y="517" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="550" y="518" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">内容工作流</text>
+<text x="520" y="550" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">任务下发 → 提交 → 审核 → 可发布</text>
+<text x="520" y="572" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">先做图文，视频放 V2</text>
+<rect x="490" y="605" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="641" r="16" fill="#5b6cf0"/>
+<text x="522" y="647" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="550" y="648" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">合作管理</text>
+<text x="520" y="680" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">合作周期跟踪、创作者分配</text>
+<text x="520" y="702" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">交付管理</text>
+<rect x="490" y="735" width="470" height="115" rx="16" fill="#fff" stroke="#c9cff8" stroke-width="1.5"/>
+<circle cx="522" cy="771" r="16" fill="#5b6cf0"/>
+<text x="522" y="777" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="550" y="778" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">数据看板</text>
+<text x="520" y="810" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">机构视图 + 运营视图</text>
+<text x="520" y="832" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">双方看同一份数据，建立信任</text>
+<rect x="1010" y="280" width="560" height="600" rx="24" fill="#ecf8f2" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1040" y="322" font-size="22" font-weight="700" fill="#2f9e6e" text-anchor="start">3 · 团队与协作方</text>
+<circle cx="1150" cy="560" r="120" fill="#2f9e6e" fill-opacity="0.18"/>
+<circle cx="1150" cy="560" r="85" fill="#2f9e6e" fill-opacity="0.3"/>
+<circle cx="1150" cy="560" r="50" fill="#2f9e6e" fill-opacity="1"/>
+<text x="1150" y="558" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">我</text>
+<text x="1150" y="582" font-size="13" font-weight="500" fill="#fff" text-anchor="middle">Lead PM</text>
+<rect x="1290" y="350" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="386" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">工程 · 每天</text>
+<text x="1310" y="418" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">约 20 名工程师，4 个子团队</text>
+<text x="1310" y="442" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">服务端和前端负责人</text>
+<text x="1310" y="466" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">QA</text>
+<line x1="1185.0" y1="525" x2="1288" y2="426" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="1290" y="522" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="558" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">产品协作</text>
+<text x="1310" y="590" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">共享设计团队</text>
+<text x="1310" y="614" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">运营负责人（范围决策伙伴）</text>
+<text x="1310" y="638" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">管理层（项目发起）</text>
+<line x1="1209.5" y1="560" x2="1288" y2="598" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="1290" y="694" width="260" height="152" rx="16" fill="#fff" stroke="#b9e3cf" stroke-width="1.5"/>
+<text x="1310" y="730" font-size="17" font-weight="700" fill="#2f9e6e" text-anchor="start">外部协作</text>
+<text x="1310" y="762" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">11 家机构（用户调研）</text>
+<text x="1310" y="786" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">各地区运营团队</text>
+<text x="1310" y="810" font-size="14" font-weight="400" fill="#5b5670" text-anchor="start">法务合规</text>
+<line x1="1234.0" y1="620" x2="1288" y2="770" stroke="#2f9e6e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<rect x="30" y="900" width="1540" height="300" rx="24" fill="#f4efff" stroke="#d8c8fb" stroke-width="1.5"/>
+<text x="60" y="942" font-size="22" font-weight="700" fill="#8b5cf6" text-anchor="start">4 · MVP 范围方法：让 8 周成为可能的四步</text>
+<rect x="60" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="96" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="96" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">1</text>
+<text x="126" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">写完整 PRD</text>
+<text x="90" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">独立撰写</text>
+<text x="90" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">故意写多</text>
+<text x="90" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">让取舍可见</text>
+<line x1="403" y1="1070" x2="436" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="440" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="476" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="476" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">2</text>
+<text x="506" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">3 天技术评估</text>
+<text x="470" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">服务端 + 前端负责人</text>
+<text x="470" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">每条需求：工作量 + 风险</text>
+<text x="470" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">不开会</text>
+<line x1="783" y1="1070" x2="816" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="820" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="856" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="856" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">3</text>
+<text x="886" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">按业务风险定 MVP</text>
+<text x="850" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">工程量 × 不做的业务风险</text>
+<text x="850" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">工作量小、风险高：保留</text>
+<text x="850" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">工作量大、风险低：砍掉</text>
+<line x1="1163" y1="1070" x2="1196" y2="1070" stroke="#8b5cf6" stroke-width="2.5" marker-end="url(#a8b5cf6)"/>
+<rect x="1200" y="965" width="340" height="210" rx="16" fill="#fff" stroke="#d8c8fb" stroke-width="1.5"/>
+<circle cx="1236" cy="1003" r="18" fill="#8b5cf6"/>
+<text x="1236" y="1009" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">4</text>
+<text x="1266" y="1010" font-size="19" font-weight="700" fill="#1f1b2e" text-anchor="start">每周砍范围</text>
+<text x="1230" y="1058" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">每周 30 分钟</text>
+<text x="1230" y="1088" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">还能按时上线吗？</text>
+<text x="1230" y="1118" font-size="15" font-weight="400" fill="#5b5670" text-anchor="start">加一个，就拿掉一个</text>
+<rect x="30" y="1220" width="1540" height="330" rx="24" fill="#1f1b2e" stroke="#1f1b2e" stroke-width="1.5"/>
+<text x="60" y="1262" font-size="22" font-weight="700" fill="#fff" text-anchor="start">5 · 结果</text>
+<rect x="60" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="85" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">8 周</text>
+<text x="85" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">从 0 到 1</text>
+<text x="85" y="1381" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">行业通常 6 到 9 个月</text>
+<rect x="565" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="590" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">11 / 11</text>
+<text x="590" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">合作机构全部留存</text>
+<text x="590" y="1381" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">没有一家转向第三方</text>
+<rect x="1070" y="1285" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="1095" y="1331" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">数周 → 数天</text>
+<text x="1095" y="1361" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">机构签约创作者</text>
+<rect x="60" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="85" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">邮件 → 数小时</text>
+<text x="85" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">平台内完成稿件审核</text>
+<rect x="565" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="590" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">协调 → 策略</text>
+<text x="590" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">运营团队的工作重心</text>
+<rect x="1070" y="1413" width="475" height="115" rx="16" fill="#2b2640" stroke="#3a3456" stroke-width="1.5"/>
+<text x="1095" y="1459" font-size="26" font-weight="700" fill="#ffd1b3" text-anchor="start">商业化基础</text>
+<text x="1095" y="1489" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">成为后续商业化</text>
+<text x="1095" y="1509" font-size="14" font-weight="400" fill="#c9c4dd" text-anchor="start">功能的底座</text>
+</svg>
