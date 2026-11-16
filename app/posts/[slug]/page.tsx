@@ -119,7 +119,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   const tags = [post.category, ...post.tags.filter((tag) => tag !== post.category)];
 
   return (
-    <article className="column" lang={post.lang === "zh" ? "zh-CN" : "en"}>
+    <article className="page" lang={post.lang === "zh" ? "zh-CN" : "en"}>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
       <div className="article-top">
         <Link href="/writing">{d.post.back}</Link>

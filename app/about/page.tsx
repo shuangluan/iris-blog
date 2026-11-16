@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
 import { getLang } from "@/lib/lang-server";
 import { SITE_URL, pageMeta, jsonLd, personSchema } from "@/lib/site";
 
@@ -39,7 +41,7 @@ const copy = {
     hi: "Hi, I'm",
     motto: "The world is a playground, and I'm just a kid playing in it.",
     bio: [
-      "I'm an independent consultant and creator working between Shanghai and New York. I spent 7.5 years as a product manager at ByteDance / TikTok, building internal platforms and creator tools. Now I help teams and aspiring AI PMs turn AI ideas into products engineers can actually build, and I write here about the things I care about that don't fit anywhere else: product decisions, small notes, case studies, travel notes, and the side projects I keep making on weekends.",
+      "I'm an internet product manager working between Shanghai and New York. I spent 7.5 years as a product manager at ByteDance / TikTok, building internal platforms and creator tools. Now I help teams and aspiring AI PMs turn AI ideas into products engineers can actually build, and I write here about the things I care about that don't fit anywhere else: product decisions, small notes, case studies, travel notes, and the side projects I keep making on weekends.",
       "In 2026 I co-founded a company to explore AI products; currently running solo while I focus on consulting and writing."
     ],
     reachA: "The best way to reach me is",
@@ -50,7 +52,7 @@ const copy = {
       ["📍", "Location", "Columbia, South Carolina"],
       ["🎧", "Listening to", "Five Little Monkeys (my son's favorite)"],
       ["📖", "Reading", "Nothing"],
-      ["🛠️", "Building", "Verbatim"],
+      ["🛠️", "Building", "ZEAI"],
       ["🎬", "Watching", "Nothing"]
     ],
     made: "Things I've made",
@@ -71,7 +73,7 @@ const copy = {
     hi: "你好，我是",
     motto: "世界是个游乐场，而我只是在里面玩耍的小孩。",
     bio: [
-      "我是一名独立顾问和创作者，在上海和纽约之间生活和工作。我在字节跳动 / TikTok 做了 7.5 年产品经理，做过 TikTok 效率协作平台、内部运营后台和创作者平台。现在我帮助团队和想转型 AI PM 的人，把 AI 想法变成工程师真正能做出来的产品。我也在这里写那些放不进别的地方的东西：产品决策、随笔、案例复盘、旅行笔记，以及我周末一直在做的个人项目。",
+      "我是一名互联网产品经理，工作在上海和纽约之间。我在字节跳动 / TikTok 做了 7.5 年产品经理，做过 TikTok 效率协作平台、内部运营后台和创作者平台。现在我帮助团队和想转型 AI PM 的人，把 AI 想法变成工程师真正能做出来的产品。我也在这里写那些放不进别的地方的东西：产品决策、随笔、案例复盘、旅行笔记，以及我周末一直在做的个人项目。",
       "2026 年我联合创办了一家公司探索 AI 产品；目前一个人在做，专注于咨询和写作。"
     ],
     reachA: "联系我最好的方式是",
@@ -82,7 +84,7 @@ const copy = {
       ["📍", "所在地", "南卡罗来纳州 Columbia"],
       ["🎧", "在听", "Five Little Monkeys（我儿子最爱的）"],
       ["📖", "在读", "暂无"],
-      ["🛠️", "在做", "Verbatim"],
+      ["🛠️", "在做", "ZEAI"],
       ["🎬", "在看", "暂无"]
     ],
     made: "我做过的东西",
@@ -103,25 +105,37 @@ export default function AboutPage() {
   const c = copy[getLang()];
 
   return (
-    <div className="column page-stack">
+    <div className="page page-stack">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      <header className="page-head">
-        <p className="eyebrow">{c.chip}</p>
-        <h1 className="page-title">{c.hi} Iris.</h1>
-        <p className="motto">{c.motto}</p>
-      </header>
-
-      <section className="prose">
-        {c.bio.map((para) => (
-          <p key={para.slice(0, 24)}>{para}</p>
-        ))}
-        <p>
-          {c.reachA}{" "}
-          <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
-          <Link href="/services">{c.servicesLink}</Link>
-          {c.period}
-        </p>
-      </section>
+      <div className="about-hero">
+        <div>
+          <PageHeader title={`${c.hi} Iris.`} />
+          <p className="motto">{c.motto}</p>
+          <section className="prose">
+            {c.bio.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+            <p>
+              {c.reachA}{" "}
+              <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
+              <Link href="/services">{c.servicesLink}</Link>
+              {c.period}
+            </p>
+          </section>
+        </div>
+        <figure className="about-photo">
+          <Image
+            src="/images/iris-portrait.jpg"
+            alt="Portrait of Iris Luan"
+            width={683}
+            height={853}
+            priority
+            sizes="(max-width: 767px) 100vw, 40vw"
+            className="about-portrait"
+          />
+          <figcaption>Iris Luan</figcaption>
+        </figure>
+      </div>
 
       <section>
         <h2 className="section-title">{c.currently}</h2>
@@ -132,7 +146,15 @@ export default function AboutPage() {
                 <span aria-hidden>{e} </span>
                 {k}
               </dt>
-              <dd>{v}</dd>
+              <dd>
+                {v === "ZEAI" ? (
+                  <a href="https://zeai.ai" rel="noreferrer">
+                    ZEAI
+                  </a>
+                ) : (
+                  v
+                )}
+              </dd>
             </div>
           ))}
         </dl>

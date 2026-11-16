@@ -117,7 +117,7 @@ export default function RootLayout({
       className={`${serif.variable} ${sans.variable} ${mono.variable} ${serifSc.variable}`}
     >
       <body>
-        <Nav lang={navLang} pathname={pathname} from={`${pathname}${search}`} />
+        <Nav lang={navLang} from={`${pathname}${search}`} />
         <main className={home ? "site-main" : "site-main site-main-page"}>{children}</main>
         <Footer lang={lang} />
         <Analytics />
