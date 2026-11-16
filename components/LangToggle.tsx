@@ -1,48 +1,13 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { HREFLANG, LANG_COOKIE, type Lang } from "@/lib/i18n";
+import { t, type Lang } from "@/lib/i18n";
 
-/**
- * Flips the UI language cookie. If the current page declares a translation
- * via <link rel="alternate" hreflang="..."> (post pages do), jump to it;
- * otherwise just re-render the current page in the other language.
- */
-export default function LangToggle({
-  lang,
-  label,
-  aria
-}: {
-  lang: Lang;
-  label: string;
-  aria: string;
-}) {
-  const router = useRouter();
+/** Full navigation so the cookie is set without JavaScript. */
+export default function LangToggle({ lang, from }: { lang: Lang; from: string }) {
   const target: Lang = lang === "en" ? "zh" : "en";
-
-  function onClick() {
-    document.cookie = `${LANG_COOKIE}=${target}; path=/; max-age=31536000; samesite=lax`;
-    const alt = document.querySelector<HTMLLinkElement>(
-      `link[rel="alternate"][hreflang="${HREFLANG[target]}"]`
-    );
-    if (alt?.href) {
-      const url = new URL(alt.href);
-      if (url.pathname !== window.location.pathname) {
-        router.push(url.pathname);
-        router.refresh();
-        return;
-      }
-    }
-    router.refresh();
-  }
-
+  const d = t(lang).toggle;
+  const href = `/lang?to=${target}&from=${encodeURIComponent(from || "/")}`;
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={aria}
-      className="pill-nav ml-1 border border-lilac-200/60"
-    >
-      {label}
-    </button>
+    <a className="lang-toggle" href={href} hrefLang={target === "zh" ? "zh-CN" : "en"} aria-label={d.aria}>
+      {d.label}
+    </a>
   );
 }

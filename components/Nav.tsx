@@ -1,50 +1,56 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { t, type Lang } from "@/lib/i18n";
+import { navCurrent } from "@/lib/nav";
 import LangToggle from "./LangToggle";
 
-export default function Nav({ lang }: { lang: Lang }) {
-  const pathname = usePathname();
+/**
+ * Client island so the underline follows client navigations. The root layout
+ * does not re-render on those navigations, which left Home underlined.
+ * The first HTML is still rendered on the server (usePathname is available
+ * during SSR), so curl sees aria-current.
+ */
+export default function Nav({ lang, from }: { lang: Lang; from: string }) {
+  const pathname = usePathname() || "/";
+  const current = navCurrent(pathname);
   const d = t(lang);
   const links = [
     { href: "/", label: d.nav.home },
-    { href: "/posts", label: d.nav.writing },
-    { href: "/tags", label: d.nav.tags },
+    { href: "/writing", label: d.nav.writing },
+    { href: "/projects", label: d.nav.projects },
     { href: "/services", label: d.nav.services },
     { href: "/about", label: d.nav.about }
   ];
-  return (
-    <header className="sticky top-3 z-50 px-2 sm:px-4">
-      <div className="max-w-5xl mx-auto glass rounded-full px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2 sm:gap-3">
-        <Link href="/" className="flex items-center gap-2 no-underline">
-          <span className="inline-flex w-8 h-8 items-center justify-center rounded-full bg-gradient-to-br from-blush-400 to-lilac-400 text-white text-sm">
-            ✿
-          </span>
-          <span className="hidden sm:inline font-medium text-ink-900 text-base tracking-tight">
-            iris.luan
-          </span>
+  const items = (suffix: string) =>
+    links.map((l) => {
+      const on = current === l.href;
+      return (
+        <Link key={`${suffix}-${l.href}`} href={l.href} aria-current={on ? "page" : undefined}>
+          {l.label}
         </Link>
-        <nav className="flex items-center gap-0.5">
-          {links.map((l) => {
-            const active =
-              l.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(l.href);
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                data-active={active}
-                // Home is reachable via the logo, so drop it on small screens to fit
-                className={`pill-nav${l.href === "/" ? " hidden sm:inline-flex" : ""}`}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
-          <LangToggle lang={lang} label={d.toggle.label} aria={d.toggle.aria} />
+      );
+    });
+  return (
+    <header className="site-header">
+      <div className="site-header-inner">
+        <Link href="/" className="wordmark">
+          iris.luan
+        </Link>
+        <nav className="desktop-nav" data-nav="desktop" aria-label={lang === "zh" ? "主导航" : "Primary"}>
+          {items("d")}
+          <LangToggle lang={lang} from={from} />
         </nav>
+        <div className="mobile-tools">
+          <LangToggle lang={lang} from={from} />
+          <details className="mobile-menu">
+            <summary className="menu-summary">{d.nav.menu}</summary>
+            <nav className="menu-panel" data-nav="mobile" aria-label={lang === "zh" ? "主导航" : "Primary"}>
+              {items("m")}
+            </nav>
+          </details>
+        </div>
       </div>
     </header>
   );

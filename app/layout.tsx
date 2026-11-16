@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { headers } from "next/headers";
-import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Source_Serif_4, Source_Sans_3, Source_Code_Pro } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -9,20 +10,54 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getLang } from "@/lib/lang-server";
 import { getPost } from "@/lib/posts";
+import type { Lang } from "@/lib/i18n";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
-// Self-hosted at build time: no render-blocking request to Google Fonts.
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  axes: ["opsz"],
-  variable: "--font-fraunces",
-  display: "swap"
+// Static 400/600. This Next.js font build rejects `axes` unless the face is
+// requested as a variable font, which would pull every weight. opsz stays off.
+const serif = Source_Serif_4({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-source-serif",
+  display: "swap",
+  adjustFontFallback: true,
+  preload: true
 });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+
+const sans = Source_Sans_3({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  style: "normal",
+  variable: "--font-source-sans",
+  display: "swap",
+  adjustFontFallback: true,
+  preload: true
+});
+
+const mono = Source_Code_Pro({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: "normal",
+  variable: "--font-source-code",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: true
+});
+
+const serifSc = localFont({
+  src: [
+    { path: "../public/fonts/NotoSerifSC-subset-400.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/NotoSerifSC-subset-600.woff2", weight: "600", style: "normal" }
+  ],
+  variable: "--font-noto-serif-sc",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false
+});
 
 export const viewport: Viewport = {
-  themeColor: "#fff9f2",
+  themeColor: "#f4f3f0",
   width: "device-width",
   initialScale: 1
 };
@@ -54,12 +89,15 @@ export const metadata: Metadata = {
   }
 };
 
-/** Article pages declare the post's own language; everything else follows the UI. */
-function htmlLang(uiLang: "en" | "zh") {
-  const m = headers().get("x-pathname")?.match(/^\/posts\/([^/]+)$/);
-  const post = m ? getPost(decodeURIComponent(m[1])) : null;
-  const lang = post?.lang ?? uiLang;
-  return lang === "zh" ? "zh-CN" : "en";
+/**
+ * Page language: an article uses the post's language; every other page uses
+ * the UI cookie. The nav follows this, so a Chinese post shows 首页 / 文章 / …
+ */
+function pageLang(uiLang: Lang, pathname: string): Lang {
+  const m = pathname.match(/^\/posts\/([^/]+)$/);
+  if (!m) return uiLang;
+  const post = getPost(decodeURIComponent(m[1]));
+  return post?.lang ?? uiLang;
 }
 
 export default function RootLayout({
@@ -69,16 +107,18 @@ export default function RootLayout({
 }) {
   const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
   const lang = getLang();
+  const pathname = headers().get("x-pathname") ?? "/";
+  const search = headers().get("x-search") ?? "";
+  const navLang = pageLang(lang, pathname);
+  const home = pathname === "/";
   return (
     <html
-      lang={htmlLang(lang)}
-      className={`${inter.variable} ${fraunces.variable} ${mono.variable}`}
+      lang={navLang === "zh" ? "zh-CN" : "en"}
+      className={`${serif.variable} ${sans.variable} ${mono.variable} ${serifSc.variable}`}
     >
-      <body className="min-h-screen flex flex-col pt-3">
-        <Nav lang={lang} />
-        <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-14">
-          {children}
-        </main>
+      <body>
+        <Nav lang={navLang} from={`${pathname}${search}`} />
+        <main className={home ? "site-main" : "site-main site-main-page"}>{children}</main>
         <Footer lang={lang} />
         <Analytics />
         <SpeedInsights />
@@ -93,4 +133,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-} 
+}

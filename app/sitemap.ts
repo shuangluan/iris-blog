@@ -24,11 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  // Only tags with 2+ distinct posts; single-post tag pages are noindexed.
+  // Tag filters with 2+ posts. Single-post filters stay noindex on /writing.
   const tagEntries = getAllTags()
     .filter(({ tag }) => getPostsByTag(tag, "en").length >= 2)
     .map(({ tag }) => ({
-      url: absoluteUrl(`/tags/${encodeURIComponent(tag)}`),
+      url: absoluteUrl(`/writing?tag=${encodeURIComponent(tag)}`),
       lastModified: new Date(getPostsByTag(tag)[0].date),
       changeFrequency: "weekly" as const,
       priority: 0.4
@@ -36,10 +36,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: absoluteUrl("/"), lastModified: latest, changeFrequency: "weekly", priority: 1 },
-    { url: absoluteUrl("/posts"), lastModified: latest, changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/writing"), lastModified: latest, changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/projects"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/services"), changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/about"), changeFrequency: "monthly", priority: 0.8 },
-    { url: absoluteUrl("/tags"), lastModified: latest, changeFrequency: "weekly", priority: 0.5 },
     ...postEntries,
     ...tagEntries
   ];
