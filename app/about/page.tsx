@@ -113,42 +113,42 @@ export default function AboutPage() {
   return (
     <div className="page page-stack">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      <div className="about-hero">
-        <div>
-          <PageHeader title={`${c.hi} Iris.`} />
-          <p className="motto">{c.motto}</p>
-          <section className="prose">
-            {c.bio.map((para) => (
-              <p key={para.slice(0, 24)}>{para}</p>
-            ))}
-            <p>
-              {c.founded.before}
-              <a href="https://zeai.ai" rel="noreferrer">
-                ZEAI
-              </a>
-              {c.founded.after}
-            </p>
-            <p>
-              {c.reachA}{" "}
-              <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
-              <Link href="/services">{c.servicesLink}</Link>
-              {c.period}
-            </p>
-          </section>
+      <div>
+        <PageHeader title={`${c.hi} Iris.`} />
+        <p className="motto">{c.motto}</p>
+        <div className="about-hero">
+            <section className="prose">
+              {c.bio.map((para) => (
+                <p key={para.slice(0, 24)}>{para}</p>
+              ))}
+              <p>
+                {c.founded.before}
+                <a href="https://zeai.ai" rel="noreferrer">
+                  ZEAI
+                </a>
+                {c.founded.after}
+              </p>
+              <p>
+                {c.reachA}{" "}
+                <a href="mailto:luanshuang.ls@gmail.com">hi@irisluan.com</a>. {c.reachB}{" "}
+                <Link href="/services">{c.servicesLink}</Link>
+                {c.period}
+              </p>
+            </section>
+            <figure className="about-photo">
+              <Image
+                src="/images/iris-portrait.jpg"
+                alt="Portrait of Iris Luan"
+                width={683}
+                height={853}
+                priority
+                sizes="(max-width: 767px) 160px, 200px"
+                className="about-portrait"
+              />
+              <figcaption>Iris Luan</figcaption>
+            </figure>
+          </div>
         </div>
-        <figure className="about-photo">
-          <Image
-            src="/images/iris-portrait.jpg"
-            alt="Portrait of Iris Luan"
-            width={683}
-            height={853}
-            priority
-            sizes="(max-width: 767px) 100vw, 40vw"
-            className="about-portrait"
-          />
-          <figcaption>Iris Luan</figcaption>
-        </figure>
-      </div>
 
       <section>
         <h2 className="section-title">{c.currently}</h2>
