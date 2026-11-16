@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
 import { getLang } from "@/lib/lang-server";
 import { t, type Lang } from "@/lib/i18n";
 import { PROJECTS, type Project } from "@/lib/projects";
@@ -24,10 +25,8 @@ export default function ProjectsPage() {
   const d = t(lang).projectsPage;
 
   return (
-    <div className="measure page-stack">
-      <header className="page-head">
-        <h1 className="page-title">{d.title}</h1>
-      </header>
+    <div className="page">
+      <PageHeader title={d.title} />
       <div>
         {PROJECTS.map((project) => {
           const related = project.relatedNeedle

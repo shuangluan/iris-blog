@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
 import { getLang } from "@/lib/lang-server";
 import { SITE_URL, pageMeta, jsonLd, personSchema } from "@/lib/site";
 
@@ -282,13 +283,12 @@ export default function ServicesPage() {
   const headline = /[A-Za-z0-9]$/.test(c.h1a) ? `${c.h1a} ${c.h1b}` : `${c.h1a}${c.h1b}`;
 
   return (
-    <div className="measure page-stack">
+    <div className="page">
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(schema)} />
-      <header className="page-head">
-        <p className="eyebrow">{c.chip}</p>
-        <h1 className="page-title">{headline}</h1>
+      <PageHeader title={headline}>
         <p className="dek">{c.intro}</p>
-      </header>
+      </PageHeader>
+      <div className="page-stack">
 
       <section>
         {c.tiers.map((tier) => {
@@ -389,6 +389,7 @@ export default function ServicesPage() {
           </a>
         </div>
       </section>
+      </div>
     </div>
   );
 }
